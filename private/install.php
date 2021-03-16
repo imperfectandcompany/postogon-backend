@@ -1,4 +1,5 @@
 <?
+$GLOBALS['config']['url'] = 'https://www.postogon.com/devmaster';
 $php_version=phpversion();
 
 //checks to see if php version is good
@@ -37,6 +38,7 @@ if(!function_exists('mail'))
 	$mail_error="PHP Mail function is not enabled.";
 }
 
+
 //annoyance
 if(ini_get("safe_mode") )
 {
@@ -51,9 +53,19 @@ if(empty($_SESSION['does_this_work']))
 	$error=true;
 	$session_error="Sessions must be enabled.";
 }
-$GLOBALS['config']['url'] = 'https://www.postogon.com/devmaster';
-?>
 
-    <link rel="stylesheet" type="text/css" href="<?php echo $GLOBALS['config']['url']; ?>/assets/css/style.css?v=1">
-	<?php include_once('frontend/installer.php'); ?>
+$continue = $_POST['continue'];
+
+// try to create the config file and let the user continue
+$connect_code="<?php
+define('DBSERVER','".$_POST['dbhost']."');
+define('DBNAME','".$_POST['dbname']."');
+define('DBUSER','".$_POST['dbuser']."');
+define('DBPASS','".$_POST['dbpass']."');
+?>";
+
+include_once('frontend/installer.php');
+
+?>
+<link rel="stylesheet" type="text/css" href="<?php echo $GLOBALS['config']['url']; ?>/assets/css/style.css?v=1">
 
