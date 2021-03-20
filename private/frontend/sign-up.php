@@ -24,54 +24,42 @@
 
     <header class="max-w-lg mx-auto">
         <div class="text-6xl">
-            <h1 class="font-semibold text-yellow-500 text-center">So you've decided to try it out...</h1>
+            <h1 class="font-semibold text-yellow-500 text-center">Hiiiii</h1>
         </div>
 		
     </header>
 
     <main class="bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg lg:shadow-2xl md:shadow-lg sm:shadow-sm">
         <section>
-    <?php echo display_feedback(); ?>
-		
-		
-		<div class="pb-8">
-            <h3 class="font-bold text-2xl text-center">Sign up for Postogon</h3>
-<?php
-/*Call our notification handling*/ include("../frontend/sitenotif.php");
-?>
-    <?php echo display_feedback(); ?>
-</div>
+            <h3 class="font-bold text-2xl pb-8 text-center">Welcome to Postogon</h3>
+           
         </section>
         <section class="">
             <form class="flex flex-col" method="POST" action="">
                 <div class="mb-6 pt-3 rounded bg-gray-200">
-                    <label class="block text-gray-700 text-small font-bold mb-2 ml-3" for="email">Email                         <small id="emailHelp" class="text-xs text-gray-300">We'll never share your email with anyone else.</small>						   </label>
-                    <input type="email" name="signup_email" aria-describedby="emailHelp"  value="<?php echo htmlspecialchars($_POST['signup_email'], ENT_QUOTES); ?>"
+                    <label class="block text-gray-700 text-small font-bold mb-2 ml-3" for="email">Email</label>
+                    <input type="text" id="email" name="login_email" id="exampleInputEmail1" value="<?php echo htmlspecialchars($_POST['login_email'], ENT_QUOTES); ?>"
                            class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 vorder-gray-300 focus:border-yellow-600 transition duration-500 px-3 pb-3" />
-
                 </div>
 
                 <div class="mb-6 pt-3 rounded bg-gray-200">
 				
                     <label class="block text-gray-700 text-small font-bold mb-2 ml-3" for="password">Password</label>
-                    <input type="password" id="password" name="signup_password"
+                    <input type="password" id="password" name="login_password" id="exampleInputPassword1"
                            class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 vorder-gray-300 focus:border-yellow-600 transition duration-500 px-3 pb-3" />
                 </div>
 
                 <div class="flex justify-end">
-                    <a href="" class="text-sm text-yellow-600 hover:text-yellow-700 hover:underline mb-6">Terms of Service</a>
+                    <a href="" class="text-sm text-yellow-600 hover:text-yellow-700 hover:underline mb-6">Forgot Password?</a>
                 </div>
-                <input type="hidden" name="form_type" value="new_user" />	
-				<div class="g-recaptcha mb-6 mx-auto" data-sitekey="6Le78IYaAAAAANVTsHx-btMCR-uOn0eLagN2lLqN" 
-                        data-callback='onSubmit' 
-                        data-action='submit'></div>
-                <button class="bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 focus:outline-none rounded shadow-lg hover:shadow-xl transition duration-200" type="submit" name="createaccount">Sign Up</button>
+                <input type="hidden" name="form_type" value="user_login" />				
+                <button class="bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 focus:outline-none rounded shadow-lg hover:shadow-xl transition duration-200" type="submit">Sign In</button>
             </form>
                 <br />
                 <hr />
                 <div class="flex flex-col max-w-lg mx-auto text-center mt-12">
                     <p class="text-yellow-600 mb-6">Need some help?<a href="./support" class="font-bold hover:underline"> Support here</a></p>
-                <a href="./login" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 focus:outline-none rounded shadow-lg hover:shadow-xl transition duration-200">Log In</a>
+                <a href="./signup" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 focus:outline-none rounded shadow-lg hover:shadow-xl transition duration-200">Create An Account</a>
                 </div>			
 		
         </section>

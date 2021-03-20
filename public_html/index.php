@@ -1,35 +1,35 @@
 <?php
-//include our backend config file
-include("../../private/config.php");
-//gzip compression
-if(!ob_start("ob_gzhandler")) ob_start();
+include("../config.php");
 
-// php sessions store user information to be used across pages
-//the function below starts the session.
-session_start();
-
-//lists which errors will show up
-error_reporting(E_ERROR | E_WARNING | E_PARSE);
-
-//sets configuration option, 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-
+switch($GLOBALS['url_loc'][1]){
+    case "/":
+    break;
+    case "signup":
+        include('../backend/index.php');	
+    break; 
+    default:
+        include('../backend/index.php');	
+}
 ?>
 <!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Montserrat Font -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700&display=swap" rel="stylesheet">
-
-    <!-- TailwindCSS -->
-    <link rel="stylesheet" type="text/css" href="<?php echo $GLOBALS['config']['url']; ?>/assets/css/style.css?v=1">
-    <title>Master Dev - Postogon</title>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <!-- ... -->
 </head>
 <body>
+<?php
+switch($GLOBALS['url_loc'][1]){
+    case "/":
+    break;
+    case "signup":
+        include('../frontend/index.php');	
+    break; 
+    default:
+        include('../frontend/index.php');	
+}
+?>
 </body>
 </html>
