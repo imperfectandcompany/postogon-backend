@@ -1,14 +1,12 @@
 <?php
 
-$dbConnection = new DatabaseConnector($GLOBALS['db_conf']['db_host'], $GLOBALS['db_conf']['port'], $GLOBALS['db_conf']['db_db'], $GLOBALS['db_conf']['db_user'], $GLOBALS['db_conf']['db_pass'], $GLOBALS['db_conf']['db_charset']);
-
 if (isset($_POST['createaccount'])) {
 	
 if(isset($_POST['g-recaptcha-response'])) {
    // RECAPTCHA SETTINGS
    $captcha = $_POST['g-recaptcha-response'];
    $ip = $_SERVER['REMOTE_ADDR'];
-   $key = 'hehehehehehhehehehehehe';
+   $key = 'HEHEEHEHEHE';
    $url = 'https://www.google.com/recaptcha/api/siteverify';
 
    // RECAPTCH RESPONSE
@@ -28,8 +26,19 @@ try{
 	if (DatabaseConnector::query('SELECT email from users where email=:email', array(':email'=>$email))) { 
 	throw new Exception('Error: There is already someone with this email!'); 
 	}
-	DatabaseConnector::query('INSERT INTO users (email, password) VALUES (:email, :password)', array(':email'=>$email, ':password'=>$password));
-	echo "Success!";	
+	
+	if (strlen($password) >= 6 && strlen($password) <= 60) {
+	
+	//php built in validator for email, if valid then insert
+	if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+	DatabaseConnector::query('INSERT INTO users (email, password) VALUES (:email, :password)', array(':email'=>$email, ':password'=>password_hash($password, PASSWORD_BCRYPT)));
+	$success = 1;
+	} else {
+		throw new Exception('Error: Email is invalid!'); 	
+	}
+	} else {
+		throw new Exception('Error: Password must have at least 6 characters!');		
+	}	
 	}	catch (Exception $e) {
                 $GLOBALS['errors'][] = $e->getMessage();
             }	
