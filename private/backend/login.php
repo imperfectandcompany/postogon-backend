@@ -14,6 +14,7 @@ if (DatabaseConnector::query('SELECT email from users WHERE email=:email', array
 		DatabaseConnector::query('INSERT INTO login_tokens (token, user_id) VALUES (:token, :user_id)', array(':token'=>sha1($token), ':user_id'=>$user_id));
 		//pass cookie name, token itself, expiry date = current time + amount valid for which we picked for one week, then location of the server the cookie is valid for.. / for everywhere, domain cookie is valid on... postogon.com, and ssl is true, and http only which means http only meaning js cant access which prevents XSS ATTACKS.
 		setcookie("POSTOGONID", $token, time() + 60 * 60 * 24 * 7, '/', 'postogon.com', TRUE, TRUE);
+		setcookie("POSTOGONID_", '1', time() + 60 * 60 * 24 * 3, '/', 'postogon.com', TRUE, TRUE);
 	} else {
 		echo 'incorrect password!';
 	}
