@@ -31,7 +31,7 @@
 
     <main class="bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg lg:shadow-2xl md:shadow-lg sm:shadow-sm">
         <section>
-    <?php echo display_feedback(); ?>
+
 		
 		
 		<div class="pb-8">
@@ -39,7 +39,14 @@
 <?php
 /*Call our notification handling*/ include("../frontend/sitenotif.php");
 ?>
-    <?php echo display_feedback(); ?>
+<?php if(isset($success)): ?>
+			<div class="pt-8">	
+           <div class="bg-green-200 border-l-4 border-green-300 text-green-800 p-4">
+  <p class="font-bold">Success!</p>
+  <p>Your account has been registered.</p>
+</div>
+</div>
+<?php endif; ?>
 </div>
         </section>
         <section class="">

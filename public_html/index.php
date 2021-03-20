@@ -19,8 +19,11 @@ switch($GLOBALS['url_loc'][1]){
     case "signup":
         include('../backend/signup.php');	
     break;
+    case "settings":
+        include("../classes/class.user.php");		
+        include('../backend/settings.php');	
+    break; 		
     case "logout":
-        include("../classes/class.cookies.php");	
         include('../backend/logout.php');	
     break;	
     case "login":
@@ -52,8 +55,6 @@ switch($GLOBALS['url_loc'][1]){
 </head>
 <body>
 
-
-
 <?php
 
 switch($GLOBALS['url_loc'][1]){
@@ -64,7 +65,10 @@ switch($GLOBALS['url_loc'][1]){
     break;
     case "logout":
         include('../frontend/logout.php');	
-    break;		
+    break;	
+    case "settings":
+        include('../frontend/settings.php');	
+    break; 		
     case "login":
         include('../frontend/login.php');	
     break; 	

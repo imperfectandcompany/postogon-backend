@@ -1,10 +1,4 @@
 <?php 
-//use this function in the cookies class to see if the user is logged in
-if (!User::isLoggedin()){
-	die("Not logged in");
-	
-}
-
 //confirms if logout was clicked
 if (isset($_POST['confirm'])){
 	
@@ -12,8 +6,6 @@ if (isset($_POST['confirm'])){
 		if ($_POST['alldevices'] == 'alldevices' ) { 
 			DatabaseConnector::query('DELETE FROM login_tokens WHERE user_id=:userid', array(':userid'=>User::isLoggedIn()));		
 		
-		
-			
 			//otherwise only log them out of specific device
 		} else {
 			if (isset($_COOKIE['POSTOGONID'])){

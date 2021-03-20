@@ -1,5 +1,6 @@
 <?php
 
+class User {
 /**
  * Function to test if user is logged in or not
  * Returns a boolean value of true or false depending on if a user is logged in or not
@@ -29,17 +30,13 @@ public static function isLoggedIn()
 			}
 
 		} 
-	}
+	} 
 	
 	return false;	
 }
 	
 
 
-if (isLoggedIn()) { 
-		echo 'Logged In';
-		echo isLoggedIn();
-} else {
-	echo 'Not logged in';
+
 
 }
