@@ -53,7 +53,7 @@
                     <a href="" class="text-sm text-yellow-600 hover:text-yellow-700 hover:underline mb-6">Forgot Password?</a>
                 </div>
                 <input type="hidden" name="form_type" value="user_login" />				
-                <button class="bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 focus:outline-none rounded shadow-lg hover:shadow-xl transition duration-200" type="submit">Sign In</button>
+                <button name="login" class="bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 focus:outline-none rounded shadow-lg hover:shadow-xl transition duration-200" type="submit">Sign In</button>
             </form>
                 <br />
                 <hr />
