@@ -6,6 +6,8 @@ if (!User::isLoggedin()){
 	die("Not logged in");
 	
 }
+$userid = User::isLoggedIn();
+echo $userid;
 
 include('components/changepassword/changepassword.php');
 include('components/logout/logout.php');
