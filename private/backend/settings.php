@@ -7,8 +7,7 @@ if (!User::isLoggedin()){
 	
 }
 $userid = User::isLoggedIn();
-echo $userid;
-
+include('components/changeusername/changeusername.php');
 include('components/changepassword/changepassword.php');
 include('components/logout/logout.php');
 ?>

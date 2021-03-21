@@ -20,7 +20,7 @@ if ($newpassword == $newpasswordrepeat){
 	
 if(strlen($newpassword) >= 6 && strlen($newpassword) <= 60) {
 DatabaseConnector::query('UPDATE users SET password=:newpassword WHERE id=:userid', array(':newpassword'=>password_hash($newpassword, PASSWORD_BCRYPT), ':userid'=>$userid));
-	$success = 1;
+	$success = "password";
 }
 
 } else {

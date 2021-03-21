@@ -10,6 +10,7 @@ ini_set('display_startup_errors', 1);
 
 
 include("../functions/functions.general.php");
+include("../classes/class.user.php");		
 include("../classes/class.database.php");
 include("../classes/class.general.php");
 
@@ -20,9 +21,14 @@ switch($GLOBALS['url_loc'][1]){
         include('../backend/signup.php');	
     break;
     case "settings":
-        include("../classes/class.user.php");		
         include('../backend/settings.php');	
-    break; 		
+    break; 	
+    case "reset":
+        include('../backend/reset.php');	
+    break;	
+    case "redeem":
+        include('../backend/redeem.php');
+	break;
     case "logout":
         include('../backend/logout.php');	
     break;	
@@ -65,7 +71,13 @@ switch($GLOBALS['url_loc'][1]){
     break;
     case "logout":
         include('../frontend/logout.php');	
+    break;
+    case "reset":
+        include('../frontend/reset.php');	
     break;	
+    case "redeem":
+        include('../frontend/redeem.php');		
+	break;
     case "settings":
         include('../frontend/settings.php');	
     break; 		
