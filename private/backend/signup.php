@@ -6,7 +6,7 @@ if(isset($_POST['g-recaptcha-response'])) {
    // RECAPTCHA SETTINGS
    $captcha = $_POST['g-recaptcha-response'];
    $ip = $_SERVER['REMOTE_ADDR'];
-   $key = 'HEHEEHE';
+   $key = $GLOBALS['captchakey'];
    $url = 'https://www.google.com/recaptcha/api/siteverify';
 
    // RECAPTCH RESPONSE
