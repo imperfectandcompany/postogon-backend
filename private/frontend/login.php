@@ -31,21 +31,33 @@
 
     <main class="bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg lg:shadow-2xl md:shadow-lg sm:shadow-sm">
         <section>
-            <h3 class="font-bold text-2xl pb-8 text-center">Welcome to Postogon</h3>
-           
+		<div class="pb-8">
+            <h3 class="font-bold text-2xl text-center">Sign up for Postogon</h3>
+<?php
+/*Call our notification handling*/ include("../frontend/sitenotif.php");
+?>
+<?php if(isset($success)): ?>
+			<div class="pt-8">	
+           <div class="bg-green-200 border-l-4 border-green-300 text-green-800 p-4">
+  <p class="font-bold">Success!</p>
+  <p>Successfully logged in.</p>
+</div>
+</div>
+<?php endif; ?>
+</div>
         </section>
         <section class="">
             <form class="flex flex-col" method="POST" action="">
                 <div class="mb-6 pt-3 rounded bg-gray-200">
-                    <label class="block text-gray-700 text-small font-bold mb-2 ml-3" for="email">Email</label>
-                    <input type="text" id="email" name="login_email" id="exampleInputEmail1" value="<?php echo htmlspecialchars($_POST['login_email'], ENT_QUOTES); ?>"
+                    <label class="block text-gray-700 text-small font-bold mb-2 ml-3" for="emailoruser">Email / Username</label>
+                    <input type="text" id="emailoruser" name="login_emailoruser" value="<?php echo htmlspecialchars($_POST['login_emailoruser'], ENT_QUOTES); ?>"
                            class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 vorder-gray-300 focus:border-yellow-600 transition duration-500 px-3 pb-3" />
                 </div>
 
                 <div class="mb-6 pt-3 rounded bg-gray-200">
 				
                     <label class="block text-gray-700 text-small font-bold mb-2 ml-3" for="password">Password</label>
-                    <input type="password" id="password" name="login_password" id="exampleInputPassword1"
+                    <input type="password" id="password" name="login_password" 
                            class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 vorder-gray-300 focus:border-yellow-600 transition duration-500 px-3 pb-3" />
                 </div>
 
