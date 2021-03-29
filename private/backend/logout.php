@@ -1,8 +1,7 @@
 <?php 
 //use this function in the cookies class to see if the user is logged in
 if (!User::isLoggedin()){
-	die("Not logged in");
-	
+	header("Location: https://postogon.com/lit/public_html/");
 }
 
 //confirms if logout was clicked

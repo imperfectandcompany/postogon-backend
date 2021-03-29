@@ -1,6 +1,12 @@
 <?php
+if (User::isLoggedin()){
+	header("Location: https://postogon.com/lit/public_html/home");
+}
+
 try {
 	$isTokenValid = false;
+	$tokenwarning = 0;
+	$success = 0;
 	if(isset($_GET['token'])){
 	$token = $_GET['token'];	
 	if(DatabaseConnector::query('SELECT user_id FROM password_tokens WHERE token=:token', array(':token'=>sha1($token)))[0]['user_id']){
@@ -17,7 +23,7 @@ if ($newpassword == $newpasswordrepeat){
 	
 if(strlen($newpassword) >= 6 && strlen($newpassword) <= 60) {
 DatabaseConnector::query('UPDATE users SET password=:newpassword WHERE id=:userid', array(':newpassword'=>password_hash($newpassword, PASSWORD_BCRYPT), ':userid'=>$user_id));
-	$success = "password";
+	$success = "1";
 }
 
 } else {
@@ -32,7 +38,7 @@ DatabaseConnector::query('UPDATE users SET password=:newpassword WHERE id=:useri
 	}
 	}
 else {
-	throw new Exception('Error: Token is required.');
+	$tokenwarning = 1;
 }
 }	catch (Exception $e) {
                 $GLOBALS['errors'][] = $e->getMessage();

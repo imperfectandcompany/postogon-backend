@@ -36,3 +36,72 @@ function display_feedback($messages = null)
         }
     }
 }
+
+function password(){
+switch($GLOBALS['url_loc'][1]){
+    case "signup":		
+		echo("
+<script>
+const passwordToggle = document.querySelector('.js-password-toggle')
+
+passwordToggle.addEventListener('change', function() {
+  const password = document.querySelector('.js-password'),
+    passwordLabel = document.querySelector('.js-password-label')
+
+  if (password.type === 'password') {
+    password.type = 'text'
+    passwordLabel.innerHTML = 'Hide'
+  } else {
+    password.type = 'password'
+    passwordLabel.innerHTML = 'Show'
+  }
+
+  password.focus()
+})
+</script>");		
+    break;
+    case "redeem":	
+		echo("
+<script>
+const passwordToggle = document.querySelector('.js-password-toggle')
+
+passwordToggle.addEventListener('change', function() {
+  const password = document.querySelector('.js-password'),
+    passwordLabel = document.querySelector('.js-password-label')
+
+  if (password.type === 'password') {
+    password.type = 'text'
+    passwordLabel.innerHTML = 'Hide'
+  } else {
+    password.type = 'password'
+    passwordLabel.innerHTML = 'Show'
+  }
+
+  password.focus()
+})
+</script>");
+	break;
+    case "login":	
+		echo("
+<script>
+const passwordToggle = document.querySelector('.js-password-toggle')
+
+passwordToggle.addEventListener('change', function() {
+  const password = document.querySelector('.js-password'),
+    passwordLabel = document.querySelector('.js-password-label')
+
+  if (password.type === 'password') {
+    password.type = 'text'
+    passwordLabel.innerHTML = 'Hide'
+  } else {
+    password.type = 'password'
+    passwordLabel.innerHTML = 'Show'
+  }
+
+  password.focus()
+})
+</script>
+");		
+    break; 	
+}
+}

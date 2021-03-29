@@ -20,6 +20,15 @@ switch($GLOBALS['url_loc'][1]){
     case "signup":
         include('../backend/signup.php');	
     break;
+    case "join":
+		header("location:../public_html/signup");
+    break;
+    case "signin":
+		header("location:../public_html/login");
+    break;	
+    case "signup":
+        include('../backend/signup.php');	
+    break;	
     case "settings":
         include('../backend/settings.php');	
     break; 	
@@ -28,6 +37,9 @@ switch($GLOBALS['url_loc'][1]){
     break;	
     case "redeem":
         include('../backend/redeem.php');
+	break;
+    case "profile":
+        include('../backend/profile.php');
 	break;
     case "logout":
         include('../backend/logout.php');	
@@ -48,11 +60,30 @@ switch($GLOBALS['url_loc'][1]){
     case "/":
     break;
     case "signup":
-        echo("    <script src='https://www.google.com/recaptcha/api.js' async defer></script>
-");	
-    break; 
-    default:
+        echo("<title>Sign Up #postogon</title>");		
+        echo("<script src='https://www.google.com/recaptcha/api.js' async defer></script>");	
     break;
+    case "logout":
+        echo("<title>Logout #postogon</title>");		
+    break;
+    case "reset":
+        echo("<title>Reset #postogon</title>");
+        echo("<script src='https://www.google.com/recaptcha/api.js' async defer></script>");			
+    break;	
+    case "redeem":
+        echo("<title>Redeem #postogon</title>");	
+	break;
+    case "profile":
+        echo("<title>Profile #postogon</title>");		
+	break;	
+    case "settings":
+        echo("<title>Settings #postogon</title>");		
+    break;
+    case "login":	
+        echo("<title>Login #postogon</title>");		
+    break; 	
+    default:
+        echo("<title>#postogon</title>");
 }
 ?>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -60,9 +91,7 @@ switch($GLOBALS['url_loc'][1]){
   <!-- ... -->
 </head>
 <body>
-
 <?php
-
 switch($GLOBALS['url_loc'][1]){
     case "/":
     break;
@@ -78,6 +107,9 @@ switch($GLOBALS['url_loc'][1]){
     case "redeem":
         include('../frontend/redeem.php');		
 	break;
+    case "profile":
+        include('../frontend/profile.php');
+	break;	
     case "settings":
         include('../frontend/settings.php');	
     break; 		

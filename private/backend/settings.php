@@ -1,10 +1,7 @@
 <?php
-
-
 //use this function in the user class to see if the user is logged in
 if (!User::isLoggedin()){
-	die("Not logged in");
-	
+	header("Location: https://postogon.com/lit/public_html/login");
 }
 $userid = User::isLoggedIn();
 include('components/changeusername/changeusername.php');
