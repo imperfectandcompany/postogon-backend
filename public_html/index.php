@@ -25,6 +25,12 @@ switch($GLOBALS['url_loc'][1]){
     break;
     case "signin":
 		header("location:../public_html/login");
+    break;
+    case "home":
+        include('../backend/home.php');	
+    break;		
+    case "createusername":
+        include('../backend/create_a_user.php');
     break;	
     case "signup":
         include('../backend/signup.php');	
@@ -48,7 +54,7 @@ switch($GLOBALS['url_loc'][1]){
         include('../backend/login.php');	
     break; 	
     default:
-        include('../backend/index.php');	
+        include('../backend/index.php');
 }
 ?>
 <!doctype html>
@@ -58,7 +64,11 @@ switch($GLOBALS['url_loc'][1]){
 <?php
 switch($GLOBALS['url_loc'][1]){
     case "/":
+        echo("<title>Welcome #postogon</title>");	
     break;
+    case "createusername":
+        echo("<title>Create Username #postogon</title>");	
+    break;	
     case "signup":
         echo("<title>Sign Up #postogon</title>");		
         echo("<script src='https://www.google.com/recaptcha/api.js' async defer></script>");	
@@ -75,7 +85,10 @@ switch($GLOBALS['url_loc'][1]){
 	break;
     case "profile":
         echo("<title>Profile #postogon</title>");		
-	break;	
+	break;
+    case "home":
+        echo("<title>Home #postogon</title>");		
+	break;		
     case "settings":
         echo("<title>Settings #postogon</title>");		
     break;
@@ -107,6 +120,12 @@ switch($GLOBALS['url_loc'][1]){
     case "redeem":
         include('../frontend/redeem.php');		
 	break;
+    case "home":
+        include('../frontend/home.php');	
+    break;		
+    case "createusername":
+        include('../frontend/create_a_user.php');
+    break;	
     case "profile":
         include('../frontend/profile.php');
 	break;	

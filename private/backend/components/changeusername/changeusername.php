@@ -1,11 +1,11 @@
 <?php
-//get current password to fill as value in username field
+//get current username to fill as value in username field
 $username = (DatabaseConnector::query('SELECT username FROM users WHERE id=:userid', array(':userid'=>$userid))[0]['username']);
-
+	$userwarning = 0;
 if(isset($_POST['changeusername'])){
 
 	try{
-		if(!isset($_POST['username']) || !$_POST['username']){ throw new Exception('Error: You did not provide a new username!'); }
+		if(!isset($_POST['username']) || !$_POST['username']){ throw new Exception('Error: You did not provide a username!'); }
 		if($username == $_POST['username']){ throw new Exception('Error: This is already your username!'); }
 		if(DatabaseConnector::query('SELECT username from users WHERE username=:username', array('username'=>$_POST['username']))){
 			throw new Exception('Error: This username is already taken!');
@@ -17,12 +17,13 @@ if(isset($_POST['changeusername'])){
 
 //get newly changed password to fill as value in username field
 $username = (DatabaseConnector::query('SELECT username FROM users WHERE id=:userid', array(':userid'=>$userid))[0]['username']);		
-		
+		$userwarning = 1;
 		$success="username";
-		}
+	} 	else {	throw new Exception('Error: This username is way too long!');
+	}
 	}	catch (Exception $e) {
+			$userwarning = 1;
                 $GLOBALS['errors'][] = $e->getMessage();
             }	
-
 }
 ?>

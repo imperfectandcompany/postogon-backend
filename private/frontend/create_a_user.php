@@ -35,55 +35,50 @@ input:-webkit-autofill:active {
 <main class="bg-white max-w-md mx-auto p-8 md:border-t-8 md:border-purple-700 md:p-12 md:my-10 rounded lg:shadow-2xl md:shadow-lg sm:shadow-sm">
         <section>
 		<div class="pb-8">
-            <h3 class="font-bold text-2xl text-center">Log into Postogon</h3>
+            <h3 class="font-bold text-2xl text-center"><?php if($success == 0): ?><?php if(!$success): ?>Create A Username<?php endif; ?><?php endif; ?><?php if($success === "username"): ?>What's up <?php echo $username; ?>.<?php endif; ?></h3>
 <?php
 /*Call our notification handling*/ include("../frontend/sitenotif.php");
 ?>
-<?php if(isset($success)): ?>
+
+<?php if($userwarning == 0): ?>
+			<div class="pt-8">	
+           <div class="bg-yellow-200 border-l-4 border-yellow-300 text-yellow-800 p-4">
+  <p class="font-bold">Welcome...</p>
+  <p>Choose a username to continue.</p>
+</div>
+</div>
+<?php endif; ?>
+
+<?php if($success === "username"): ?>
 			<div class="pt-8">	
            <div class="bg-green-200 border-l-4 border-green-300 text-green-800 p-4">
   <p class="font-bold">Success!</p>
   <p>You have logged in.</p>
   <p>Refreshing in 3...<?php header('Refresh: 3; URL=https://postogon.com/lit/public_html/home');?></p>
 </div>
-</div>
+</div>				
 <?php endif; ?>
-</div>
         </section>
-        <section>
-            <form class="flex flex-col" method="POST">
+		<?php if($success == 0): ?>		
+        <section>	
+            <form class="flex flex-col" method="post">
                 <div class="mb-6 pt-3 rounded bg-gray-200">
-                    <label class="block text-gray-400 text-small font-bold mb-2 ml-3" for="emailoruser">Email / Username</label>
-                    <input type="text" id="emailoruser" name="login_emailoruser" value="" class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 px-3 pb-3"/>
-                </div>
-
-                <div class="mb-6 pt-3 rounded bg-gray-200">
-
-  <div class="relative w-full">
-                      <label class="block text-gray-400 focus:text-gray-500 text-small font-bold mb-2 ml-3" for="password">Password</label>
-    <div class="absolute inset-y-0 right-0 flex items-center px-2">
-      <input class="hidden js-password-toggle" id="toggle" type="checkbox" />
-      <label class="bg-gray-300 hover:bg-gray-400 rounded px-2 py-1 text-sm text-gray-600 font-mono select-none cursor-pointer js-password-label" for="toggle">Show</label>
-    </div>
-	<input type="password" id="password" autocomplete="off" name="login_password" class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 js-password px-3 pb-3"/>	
-  </div>
-                </div>
-
-                <div class="flex justify-end">
-                    <a href="./reset" class="text-sm text-purple-500 hover:text-purple-700 hover:underline underline-none mb-6">Forgot Password?</a>
-                </div>
-                <input type="hidden" name="form_type" value="user_login">                
-                <button name="login" class="border border-purple-600 bg-white hover:bg-gray-100 hover:border-purple-300 hover:text-purple-400 text-purple-500 font-bold py-2 focus:outline-none rounded shadow-sm hover:shadow-md transition duration-200" type="submit">Log In</button>
+                    <label class="block text-gray-400 text-small font-bold mb-2 ml-3" for="username">Username</label>
+                    <input type="text" id="username" type="username" name="username" value="<?php echo htmlspecialchars($username, ENT_QUOTES); ?>""
+                           class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 px-3 pb-3" <?php if($success === "username"): ?>readonly<?php endif; ?>/>
+                </div>      
+                <button type="submit" name="changeusername" class="border border-purple-600 bg-white hover:bg-gray-100 hover:border-purple-300 hover:text-purple-400 text-purple-500 font-bold py-2 focus:outline-none rounded shadow-sm hover:shadow-md transition duration-200" <?php if($success === "username"): ?>disabled<?php endif; ?>>Continue</button>
             </form>
-        </section>			
-                <br>
-                <hr>
+			<br>
+			<hr>			
 			<section>
                 <div class="flex flex-col max-w-lg mx-auto text-center mt-12">
                     <p class="text-purple-600 mb-6 font-bold">Need some help?<a href="./contact" class="font-normal text-purple-500 pl-2 hover:text-purple-700 hover:underline underline-none ml-1">Contact Us</a></p>
-                <a href="./signup" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 focus:outline-none rounded shadow-md hover:shadow-xl transition duration-200">Create An Account</a>
+                <a href="./logout" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 focus:outline-none rounded shadow-md hover:shadow-xl transition duration-200">log Out</a>
                 </div>
-			</section>
+			</section>		
+        </section>
+			<?php endif; ?>	
     </main>
 <!-- Imprint -->
 <div class="md:flex items-center text-center text-sm">
@@ -99,5 +94,5 @@ input:-webkit-autofill:active {
             <div>
             </div>
           </div>
-      </div>	
-<?php password(); ?> 
+      </div>
+<?php password(); ?> 	  

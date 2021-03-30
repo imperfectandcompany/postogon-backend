@@ -77,6 +77,14 @@ input:-webkit-autofill:active {
                 </div>      
                 <button type="submit" class="border border-purple-600 bg-white hover:bg-gray-100 hover:border-purple-300 hover:text-purple-400 text-purple-500 font-bold py-2 focus:outline-none rounded shadow-sm hover:shadow-md transition duration-200">Redeem Token</button>
             </form>
+			<br>
+			<hr>			
+			<section>
+                <div class="flex flex-col max-w-lg mx-auto text-center mt-12">
+				<p class="text-purple-600 mb-6 font-bold">Need some help?<a href="./contact" class="font-normal text-purple-500 pl-2 hover:text-purple-700 hover:underline underline-none ml-1">Contact Us</a></p>
+                <a href="./login" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 focus:outline-none rounded shadow-md hover:shadow-xl transition duration-200">Go back</a>
+                </div>
+			</section>			
 		<?php endif; ?>
 		<?php if($isTokenValid): ?>
             <form class="flex flex-col" method="POST">		
@@ -96,6 +104,14 @@ input:-webkit-autofill:active {
 		</div>	
                 <button type="submit" value="Change Password" name="changepassword"class="border border-purple-600 bg-white hover:bg-gray-100 hover:border-purple-300 hover:text-purple-400 text-purple-500 font-bold py-2 focus:outline-none rounded shadow-sm hover:shadow-md transition duration-200">Change Password</button>
 </form>
+			<br>
+			<hr>			
+			<section>
+                <div class="flex flex-col max-w-lg mx-auto text-center mt-12">
+				<p class="text-purple-600 mb-6 font-bold">Need some help?<a href="./contact" class="font-normal text-purple-500 pl-2 hover:text-purple-700 hover:underline underline-none ml-1">Contact Us</a></p>
+                <a href="./login" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 focus:outline-none rounded shadow-md hover:shadow-xl transition duration-200">Go back</a>
+			</section>	
+                </div>
 			<?php endif; ?>		
         </section>
 			<?php endif; ?>	
