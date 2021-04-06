@@ -54,7 +54,7 @@ input:-webkit-autofill:active {
            <div class="bg-green-200 border-l-4 border-green-300 text-green-800 p-4">
   <p class="font-bold">Success!</p>
   <p>You have logged in.</p>
-  <p>Refreshing in 3...<?php header('Refresh: 3; URL=https://postogon.com/lit/public_html/home');?></p>
+  <p>Loading...<?php header('Refresh: 1; URL=https://postogon.com/lit/public_html/home');?></p>
 </div>
 </div>				
 <?php endif; ?>

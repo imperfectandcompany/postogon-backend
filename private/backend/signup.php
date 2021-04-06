@@ -34,7 +34,7 @@ try{
 	
 	//php built in validator for email, if valid then insert
 	if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-	DatabaseConnector::query('INSERT INTO users (email, password) VALUES (:email, :password)', array(':email'=>$email, ':password'=>password_hash($password, PASSWORD_BCRYPT)));
+	DatabaseConnector::query('INSERT INTO users (email, password, verified) VALUES (:email, :password, :verified)', array(':email'=>$email, ':password'=>password_hash($password, PASSWORD_BCRYPT), ':verified'=>0));
 	$success = 1;
 	} else {
 		throw new Exception('Error: Email is invalid!'); 	

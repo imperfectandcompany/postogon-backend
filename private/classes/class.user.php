@@ -25,18 +25,90 @@ public static function isLoggedIn()
 				setcookie("POSTOGONID", $token, time() + 60 * 60 * 24 * 7, '/', 'postogon.com', TRUE, TRUE);
 				// create a second cookie to force the first cookie to expire without logging the user out, this way the user won't even know they've been given a new login toke
 				setcookie("POSTOGONID_", '1', time() + 60 * 60 * 24 * 3, '/', 'postogon.com', TRUE, TRUE);	
-
+				//get loggedin user id
 				return $userid;
 			}
 
 		} 
 	} 
-	
 	return false;	
 }
+
+public static function isAdmin($id)
+{
+	//check to see if the username is set then using the given $id. else return false.
+	if(DatabaseConnector::query('SELECT admin FROM users WHERE id=:id', array(':id'=>$id))[0]['admin'] == 1){
+	return true;
+	}
+	else{
+		return false;
 	
+}
+}
+
+public static function getUsername($id)
+{
+	//check to see if the username is set then using the given $id. else return false.
+	if(DatabaseConnector::query('SELECT username FROM users WHERE id=:id', array(':id'=>$id))[0]['username']){
+	//return username
+	return DatabaseConnector::query('SELECT username FROM users WHERE id=:id', array(':id'=>$id))[0]['username'];
+	}
+	else {
+	return false;
+	}
+}
+
+public static function getUserId($username)
+{
+	//grabs the userid of the given username $id. else return false.
+	if(DatabaseConnector::query('SELECT id FROM users WHERE username=:username', array(':username'=>$username))[0]['id']){
+	//return username
+	return DatabaseConnector::query('SELECT id FROM users WHERE username=:username', array(':username'=>$username))[0]['id'];
+	}
+	else {
+	return false;
+	}
+}
+
+public static function getUserVerified($username)
+{
+	//check to see if the username is set then using the given $id. else return false.
+	if(DatabaseConnector::query('SELECT verified FROM users WHERE username=:username', array(':username'=>$username))[0]['verified']){
+	//return username
+	return DatabaseConnector::query('SELECT verified FROM users WHERE username=:username', array(':username'=>$username))[0]['verified'];
+	}
+	else {
+	return false;
+	}
+}
+
+public static function getUserEmail($username)
+{
+	//grabs the userid of the given username $id. else return false.
+	if(DatabaseConnector::query('SELECT email FROM users WHERE username=:username', array(':username'=>$username))[0]['email']){
+	//return username
+	return DatabaseConnector::query('SELECT email FROM users WHERE username=:username', array(':username'=>$username))[0]['email'];
+	}
+	else {
+	return false;
+	}
+}
 
 
+//function to see if a user is following someone. $user is the person being followers and $follower is the followers
+public static function isUserFollowing($user, $follower)
+{
+if(DatabaseConnector::query('SELECT ID FROM followers WHERE user_id=:userid AND follower_id=:followerid', array(':userid' => $user,
+':followerid' => $follower))) {
+	//return username
+	return true;
+	}
+	else {
+	return false;
+	}
+}
 
 
 }
+
+

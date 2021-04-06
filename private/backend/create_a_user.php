@@ -3,7 +3,7 @@
 if (!User::isLoggedin()){
 	header("Location: https://postogon.com/lit/public_html/login");
 }
-if (User::hasUsername($userid)){
+if (User::getUsername($userid)){
 	//redirect mans if hes got a username already
 	header("Location: https://postogon.com/lit/public_html/home");	
 }
