@@ -12,18 +12,26 @@ if(isset($_POST['changeusername'])){
 		}
 		//set variables
 		$newusername = $_POST['username'];
-		if(strlen($newusername) >= 6 && strlen($newusername) <= 30) {
+		
+		if(strlen($newusername) <= 6) {
+		throw new Exception('Error: This username is way too short!');
+		}
+		
+		if(strlen($newusername) >= 30) {
+		throw new Exception('Error: This username is way too long!');
+		}		
+		
 		DatabaseConnector::query('UPDATE users SET username=:newusername WHERE id=:userid', array(':newusername'=>$newusername, ':userid'=>$userid));
 
 //get newly changed password to fill as value in username field
 $username = (DatabaseConnector::query('SELECT username FROM users WHERE id=:userid', array(':userid'=>$userid))[0]['username']);		
 		$userwarning = 1;
 		$success="username";
-	} 	else {	throw new Exception('Error: This username is way too long!');
-	}
-	}	catch (Exception $e) {
-			$userwarning = 1;
-                $GLOBALS['errors'][] = $e->getMessage();
-            }	
+	} 
+catch (Exception $e) {
+			$userwarning = 1;	
+    $GLOBALS['errors'][] = $e->getMessage();
+}
+
 }
 ?>

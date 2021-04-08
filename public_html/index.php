@@ -78,13 +78,15 @@ switch($GLOBALS['url_loc'][1]){
     break;
     case "reset":
         echo("<title>Reset #postogon</title>");
+		
         echo("<script src='https://www.google.com/recaptcha/api.js' async defer></script>");			
     break;	
     case "redeem":
         echo("<title>Redeem #postogon</title>");	
 	break;
     case "profile":
-        echo("<title>Profile #postogon</title>");		
+echo("<title>@".$profile."'s Profile | #postogon</title>");
+        echo("<script src='../scripts/moments.js' async defer></script>");			
 	break;
     case "home":
         echo("<title>Home #postogon</title>");		

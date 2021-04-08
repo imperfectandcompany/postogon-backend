@@ -8,13 +8,20 @@
 	if(!User::getUsername($userid)){
 		//make sure not being redirected when already on page
 		if ($GLOBALS['url_loc'][1] === "createusername"  || $GLOBALS['url_loc'][1] === "logout"){
-		echo "eskettit";
+
 		}
 		else{
 		//force user to take username onboarding
 		header("location:../public_html/createusername");
 		}
 	}
+	
+	//update last seen
+	DatabaseConnector::query('UPDATE users SET updatedAt=UNIX_TIMESTAMP() WHERE id=:userid', array(':userid'=>$userid));		
+	
+//see if a user is online matched against last seen
+	DatabaseConnector::query('UPDATE users SET status="offline" WHERE TIMESTAMPDIFF(MINUTE, FROM_UNIXTIME(updatedAt), NOW()) > 1');
+	DatabaseConnector::query('UPDATE users SET status="online" WHERE TIMESTAMPDIFF(MINUTE, FROM_UNIXTIME(updatedAt), NOW()) < 1');
 	}
 ?>
 

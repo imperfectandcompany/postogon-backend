@@ -94,8 +94,43 @@ public static function getUserEmail($username)
 	}
 }
 
+public static function getUserDate($username)
+{
+	//grabs the createdAt of the given username $id. else return false.
+	if(DatabaseConnector::query('SELECT createdAt FROM users WHERE username=:username', array(':username'=>$username))[0]['createdAt']){
+	//return createdAt
+	return DatabaseConnector::query('SELECT createdAt FROM users WHERE username=:username', array(':username'=>$username))[0]['createdAt'];
+	}	
+	else {
+	return false;
+	}
+}
 
-//function to see if a user is following someone. $user is the person being followers and $follower is the followers
+public static function getUserLastSeen($username)
+{
+	//grabs the createdAt of the given username $id. else return false.
+	if(DatabaseConnector::query('SELECT updatedAt FROM users WHERE username=:username', array(':username'=>$username))[0]['updatedAt']){
+	//return createdAt
+	return DatabaseConnector::query('SELECT updatedAt FROM users WHERE username=:username', array(':username'=>$username))[0]['updatedAt'];
+	}	
+	else {
+	return false;
+	}
+}
+
+public static function getUserStatus($username)
+{
+	//grabs the createdAt of the given username $id. else return false.
+	if(DatabaseConnector::query('SELECT status FROM users WHERE username=:username', array(':username'=>$username))[0]['status']){
+	//return createdAt
+	return DatabaseConnector::query('SELECT status FROM users WHERE username=:username', array(':username'=>$username))[0]['status'];
+	}	
+	else {
+	return false;
+	}
+}
+
+//function to see if a user is following another 
 public static function isUserFollowing($user, $follower)
 {
 if(DatabaseConnector::query('SELECT ID FROM followers WHERE user_id=:userid AND follower_id=:followerid', array(':userid' => $user,
@@ -108,7 +143,40 @@ if(DatabaseConnector::query('SELECT ID FROM followers WHERE user_id=:userid AND 
 	}
 }
 
+//function to see the amount of followers
+public static function countUserFollowers($user)
+{
+if(DatabaseConnector::query('SELECT count(*) as total FROM followers WHERE user_id=:userid', array(':userid' => $user))) {
+	//return username
+	return DatabaseConnector::query('SELECT count(*) as total FROM followers WHERE user_id=:userid', array(':userid' => $user));
+	}
+}
 
+//function to see the amount of followers
+public static function countUserFollowing($user)
+{
+if(DatabaseConnector::query('SELECT count(*) as total FROM followers WHERE follower_id=:userid', array(':userid' => $user))) {
+	//return username
+	return DatabaseConnector::query('SELECT count(*) as total FROM followers WHERE follower_id=:userid', array(':userid' => $user));
+	}
+}
+
+//function to see if a user is mutually following each-other
+public static function isUserFollowingMutual($user1, $user2)
+{
+	//if user1 is following user2
+if(self::isUserFollowing($user1, $user2)) {
+	//if user2 is following user2
+if(self::isUserFollowing($user2, $user1)) {
+			//returned true if user is not following each other
+		return true;
+		}	
+	}
+	else {
+		//returned false if user is not following each other
+	return false;
+	}
+}
 }
 
 

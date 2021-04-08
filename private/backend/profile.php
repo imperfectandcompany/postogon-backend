@@ -3,6 +3,10 @@ $profile = "";
 $usersprofile = false;
 $verified = false;
 $isFollowing = User::isUserFollowing(User::getUserId($GLOBALS['url_loc'][2]), User::isLoggedIn());
+$isFollowingMe = User::isUserFollowing(User::isLoggedIn(), User::getUserId($GLOBALS['url_loc'][2]));
+$isMutual = User::isUserFollowingMutual(User::getUserId($GLOBALS['url_loc'][2]), User::isLoggedIn());
+$followers = User::countUserFollowers(User::getUserId($GLOBALS['url_loc'][2]));
+$following = User::countUserFollowing(User::getUserId($GLOBALS['url_loc'][2]));
 
 try {
     //if profile wasnt given...
@@ -48,6 +52,10 @@ try {
 			//get id of the user that is logged in
             $followerid = User::isLoggedIn();
             $verified = User::getUserVerified($GLOBALS['url_loc'][2]);
+            $reg_date = User::getUserDate($GLOBALS['url_loc'][2]);			
+			$last_seen = User::getUserLastSeen($GLOBALS['url_loc'][2]);
+			$status = User::getUserStatus($GLOBALS['url_loc'][2]);
+			
 if ($user_id === $followerid) {
 $usersprofile = true;
 }
@@ -79,6 +87,7 @@ $usersprofile = true;
 						//prevent resubmit form submission
 					header('Location: '.$GLOBALS['url_loc'][2].'');						
                     } else {
+					header('Location: '.$GLOBALS['url_loc'][2].'');							
 					throw new Exception('Error: Already following!');
                     }
                     $isFollowing = User::isUserFollowing(User::getUserId($GLOBALS['url_loc'][2]), User::isLoggedIn());
@@ -110,7 +119,8 @@ $usersprofile = true;
 						//prevent resubmit form submission
 					header('Location: '.$GLOBALS['url_loc'][2].'');						
                     } else {
-					throw new Exception('Error: Already following!');
+					header('Location: '.$GLOBALS['url_loc'][2].'');							
+					throw new Exception('Error: Already unfollowed!');
                     }
                     $isFollowing = User::isUserFollowing(User::getUserId($GLOBALS['url_loc'][2]), User::isLoggedIn());
 
