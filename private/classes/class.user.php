@@ -147,7 +147,7 @@ if(DatabaseConnector::query('SELECT ID FROM followers WHERE user_id=:userid AND 
 public static function countUserFollowers($user)
 {
 if(DatabaseConnector::query('SELECT count(*) as total FROM followers WHERE user_id=:userid', array(':userid' => $user))) {
-	//return username
+	//return the amount of followers the user has
 	return DatabaseConnector::query('SELECT count(*) as total FROM followers WHERE user_id=:userid', array(':userid' => $user));
 	}
 }
@@ -156,7 +156,7 @@ if(DatabaseConnector::query('SELECT count(*) as total FROM followers WHERE user_
 public static function countUserFollowing($user)
 {
 if(DatabaseConnector::query('SELECT count(*) as total FROM followers WHERE follower_id=:userid', array(':userid' => $user))) {
-	//return username
+	//return the amount of people the user is following
 	return DatabaseConnector::query('SELECT count(*) as total FROM followers WHERE follower_id=:userid', array(':userid' => $user));
 	}
 }
@@ -177,6 +177,36 @@ if(self::isUserFollowing($user2, $user1)) {
 	return false;
 	}
 }
+
+
+//function to see if a user is invited 
+public static function isUserInvited($user, $inviter)
+{
+if(DatabaseConnector::query('SELECT ID FROM invites WHERE user_id=:userid AND inviter_id=:inviterid', array(':userid' => $user,
+':inviterid' => $inviter))) {
+	return true;
+	}
+	else {
+	return false;
+	}
+}
+
+//function to see if a user is a contact 
+public static function isUserContact($user, $contact)
+{
+if(DatabaseConnector::query('SELECT ID FROM contacts WHERE user_id=:userid AND contact_id=:contactid', array(':userid' => $user,
+':contactid' => $contact))) {
+	return true;
+	}
+	else {
+	return false;
+	}
+}
+
+
+
+
+
 }
 
 

@@ -7,6 +7,10 @@ $isFollowingMe = User::isUserFollowing(User::isLoggedIn(), User::getUserId($GLOB
 $isMutual = User::isUserFollowingMutual(User::getUserId($GLOBALS['url_loc'][2]), User::isLoggedIn());
 $followers = User::countUserFollowers(User::getUserId($GLOBALS['url_loc'][2]));
 $following = User::countUserFollowing(User::getUserId($GLOBALS['url_loc'][2]));
+$isInvited = User::isUserInvited(User::getUserId($GLOBALS['url_loc'][2]), User::isLoggedIn());
+$isContact = User::isUserContact(User::getUserId($GLOBALS['url_loc'][2]), User::isLoggedIn());
+$invitedMe = User::isUserInvited(User::isLoggedIn(), User::getUserId($GLOBALS['url_loc'][2]));
+$isTheirContact = User::isUserContact(User::isLoggedIn(), User::getUserId($GLOBALS['url_loc'][2]));
 
 try {
     //if profile wasnt given...
@@ -51,6 +55,8 @@ try {
             $user_id= User::getUserId($GLOBALS['url_loc'][2]);
 			//get id of the user that is logged in
             $followerid = User::isLoggedIn();
+            $inviterid = User::isLoggedIn();
+            $contactid = User::isLoggedIn();
             $verified = User::getUserVerified($GLOBALS['url_loc'][2]);
             $reg_date = User::getUserDate($GLOBALS['url_loc'][2]);			
 			$last_seen = User::getUserLastSeen($GLOBALS['url_loc'][2]);
@@ -94,6 +100,73 @@ $usersprofile = true;
                 }
             }
             
+            //check if invite button was hit
+            if (isset($_POST['invite'])) {
+                
+                //check if user is trying to invite himself        
+                if ($usersprofile != true) {
+                    
+                    //check if they are mutually following each-other
+                    if ($isMutual) {
+						//check to see if user is already invited
+					    if (!$isInvited) {	
+                        //insert query to invite the user
+                        DatabaseConnector::query('INSERT INTO invites (user_id, inviter_id) VALUES (:userid, :inviterid)', array(
+                            ':userid' => $user_id,
+                            ':inviterid' => $inviterid
+                        ));
+					header('Location: '.$GLOBALS['url_loc'][2].'');							
+					} else {
+					header('Location: '.$GLOBALS['url_loc'][2].'');							
+					throw new Exception('Error: User is already invited!');
+					}
+						//prevent resubmit form submission
+					header('Location: '.$GLOBALS['url_loc'][2].'');						
+                    } else {
+					header('Location: '.$GLOBALS['url_loc'][2].'');							
+					throw new Exception('Error: You must mutual followers!');
+                    }
+					$isInvited = User::isUserInvited(User::getUserId($GLOBALS['url_loc'][2]), User::isLoggedIn());
+                }
+            }
+
+            //check if invite button was hit
+            if (isset($_POST['accept'])) {
+        
+                //check if user is trying to accept himself        
+                if ($usersprofile != true) {
+                    //make sure you aren't already their contact
+                    if (!$isTheirContact) {
+						//check to see if user is invited
+					    if ($invitedMe) {
+			
+						//remove the invite
+                        DatabaseConnector::query('DELETE FROM invites WHERE user_id=:userid AND  inviter_id=:inviterid', array(
+                            ':userid' => $inviterid,
+                            ':inviterid' => $user_id
+                        ));		
+							
+                        //insert query to add contact
+                        DatabaseConnector::query('INSERT INTO contacts (user_id, contact_id) VALUES (:userid, :contactid)', array(
+                            ':userid' => $contactid,
+                            ':contactid' => $user_id
+                        ));
+						
+					header('Location: '.$GLOBALS['url_loc'][2].'');							
+					} else {
+					header('Location: '.$GLOBALS['url_loc'][2].'');							
+					throw new Exception('Error: User did not invite you!');
+					}
+						//prevent resubmit form submission
+					header('Location: '.$GLOBALS['url_loc'][2].'');						
+                    } else {
+					header('Location: '.$GLOBALS['url_loc'][2].'');							
+					throw new Exception('Error: You are already their contact!');
+                    }
+					$isInvited = User::isUserInvited(User::getUserId($GLOBALS['url_loc'][2]), User::isLoggedIn());
+                }
+            }				
+			
             //check if unfollow button was hit
             if (isset($_POST['unfollow'])) {
                 
@@ -106,11 +179,50 @@ $usersprofile = true;
                     ))) {
 					
 						
-                        //insert query to follow the user
+                        //insert query to unfollow the user
                         DatabaseConnector::query('DELETE FROM followers WHERE user_id=:userid AND follower_id=:followerid', array(
                             ':userid' => $user_id,
                             ':followerid' => $followerid
                         ));
+						
+						//if one of them unfollowers, remove them from all related invites and contacts
+						
+						//check to see if user is invited
+					    if ($isInvited) {	
+                        //insert query to uninvite the user
+                        DatabaseConnector::query('DELETE FROM invites WHERE user_id=:userid AND  inviter_id=:inviterid', array(
+                            ':userid' => $user_id,
+                            ':inviterid' => $inviterid
+                        ));		
+						}
+
+						//check to see if user invite me
+					    if ($invitedMe) {	
+                        //insert query to remove the invite
+                        DatabaseConnector::query('DELETE FROM invites WHERE user_id=:userid AND  inviter_id=:inviterid', array(
+                            ':userid' => $inviterid,
+                            ':inviterid' => $user_id
+                        ));		
+						}						
+
+						//check to see if user is my contact
+					    if ($isContact) {	
+                        //insert query to unlock the contact
+                        DatabaseConnector::query('DELETE FROM contacts WHERE user_id=:userid AND contact_id=:contactid', array(
+                            ':userid' => $user_id,
+                            ':contactid' => $contactid
+                        ));					
+						}			
+						
+						//check to see if im their contact
+					    if ($isTheirContact) {	
+                        //insert query to unlock the contact
+                        DatabaseConnector::query('DELETE FROM contacts WHERE user_id=:userid AND contact_id=:contactid', array(
+                            ':userid' => $contactid,
+                            ':contactid' => $user_id
+                        ));	
+						}	
+						
 						
 						//checks to see if the person unfollowing is from the verified account, if so unverify the user.. 
 						if ($followerid == 18) {
@@ -123,9 +235,69 @@ $usersprofile = true;
 					throw new Exception('Error: Already unfollowed!');
                     }
                     $isFollowing = User::isUserFollowing(User::getUserId($GLOBALS['url_loc'][2]), User::isLoggedIn());
-
                 }
-            }         
+            }
+			
+
+            //check if uninvite button was hit
+            if (isset($_POST['uninvite'])) {
+                
+                //check if user is trying to uninvite himself        
+                if ($usersprofile != true) {
+                    
+                    //check to see if user is in fact invited
+                    if ($isInvited) {
+						//check to see if user is already a contact
+					    if (!$isContact) {
+                        //insert query to uninvite the user
+                        DatabaseConnector::query('DELETE FROM invites WHERE user_id=:userid AND inviter_id=:inviterid', array(
+                            ':userid' => $user_id,
+                            ':inviterid' => $inviterid
+                        ));
+					header('Location: '.$GLOBALS['url_loc'][2].'');							
+					} else {
+					header('Location: '.$GLOBALS['url_loc'][2].'');							
+					throw new Exception('Error: User is already a contact. You cannot uninvite!');
+					}
+						//prevent resubmit form submission
+					header('Location: '.$GLOBALS['url_loc'][2].'');						
+                    } else {
+					header('Location: '.$GLOBALS['url_loc'][2].'');							
+					throw new Exception('Error: Invite to this user does not exist!');
+                    }
+                    $isInvited = User::isUserInvited(User::getUserId($GLOBALS['url_loc'][2]), User::isLoggedIn());
+                }
+            }
+			
+
+            //check if unlock (contact) button was hit
+            if (isset($_POST['unlock'])) {
+                
+                //check if user is trying to unlock himself        
+                if ($usersprofile != true) {
+                    
+                    //check to see if user is in fact a contact
+                    if ($isContact) {
+						//check to see if user is already a contact
+                        //insert query to uninvite the user
+                        DatabaseConnector::query('DELETE FROM contacts WHERE user_id=:userid AND contact_id=:contactid', array(
+                            ':userid' => $user_id,
+                            ':contactid' => $contactid
+                        ));
+					header('Location: '.$GLOBALS['url_loc'][2].'');							
+						//prevent resubmit form submission
+					header('Location: '.$GLOBALS['url_loc'][2].'');						
+                    } else {
+					header('Location: '.$GLOBALS['url_loc'][2].'');							
+					throw new Exception('Error: User is not your contact!');
+                    }
+                    $isContact = User::isUserContact(User::getUserId($GLOBALS['url_loc'][2]), User::isLoggedIn());
+                }
+            }
+			
+			
+			
+			
         }
     }
 }
