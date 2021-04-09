@@ -131,10 +131,16 @@
 				  <?php if($isFollowingMe && !$isMutual): ?>
 				                       <div class="mt-1 select-none"><span class="p-1 text-xs bg-gray-100 text-gray-800 font-semibold transition hover:text-gray-700">Follows you</span></div>
 				  <?php endif; ?>
-				  <?php if($isFollowingMe && $isMutual && !$isInvited && !$isContact && !$invitedMe): ?>
+				  <?php if($isFollowingMe && $isMutual && !$isInvited && !$isTheirContact && !$isContact && !$invitedMe): ?>
 				                       <div class="mt-1 select-none"><span class="p-1 text-xs bg-gray-100 text-gray-800 font-semibold transition hover:text-gray-700">Mutual followers</span></div>
-				  <?php endif; ?>			  
-				  <?php if($isFollowingMe && $isMutual && !$isInvited && $isContact): ?>
+				  <?php endif; ?>
+				  <?php if($isFollowingMe && $isMutual && !$isInvited && $isTheirContact && !$isContact && !$invitedMe): ?>
+				                       <div class="mt-1 select-none"><span class="p-1 text-xs bg-gray-100 text-gray-800 font-semibold transition hover:text-gray-700">Their contact</span></div>
+				  <?php endif; ?>
+				  <?php if($isFollowingMe && $isMutual && !$isInvited && $isTheirContact && $isContact && !$invitedMe): ?>
+				                       <div class="mt-1 select-none"><span class="p-1 text-xs bg-gray-100 text-gray-800 font-semibold transition hover:text-gray-700">Mutual Contacts</span></div>
+				  <?php endif; ?>				  
+				  <?php if($isFollowingMe && $isMutual && !$isInvited && !$isTheirContact && $isContact && !$invitedMe): ?>
 				                       <div class="mt-1 select-none"><span class="p-1 text-xs bg-gray-100 text-gray-800 font-semibold transition hover:text-gray-700">Your contact</span></div>
 				  <?php endif; ?>				  
 				  <?php if($isFollowingMe && $isMutual && $isInvited && !$isContact): ?>
