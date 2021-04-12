@@ -48,7 +48,7 @@ function zdateRelative($date)
     $diff = $now - $date;
 
     if ($diff < 60){
-        return sprintf($diff > 1 ? '%s seconds ago' : 'a second ago', $diff);
+        return sprintf($diff > 1 ? '%s seconds ago' : 'Just now', $diff);
     }
 
     $diff = floor($diff/60);

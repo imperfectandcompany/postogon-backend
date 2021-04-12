@@ -3,5 +3,12 @@ if (!User::isLoggedin()){
 	header("Location: https://postogon.com/lit/public_html/login");
 }
 
-$username = User::getUsername($userid);
+
+include_once('components/post/createpost.php');
+
+
+
+include_once('components/post/post.php');
+
+
 ?>

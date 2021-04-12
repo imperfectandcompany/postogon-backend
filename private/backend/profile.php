@@ -69,16 +69,16 @@ $usersprofile = true;
 
             //check if follow button was hit
             if (isset($_POST['follow'])) {
-                
+              
                 //check if user is trying to follow himself
                 if ($usersprofile != true) {
-                    
+                   
                     //check if the user is not following that user
-                    if (!DatabaseConnector::query('SELECT follower_id FROM followers WHERE user_id=:userid', array(
-                        ':userid' => $user_id
+                    if (!DatabaseConnector::query('SELECT follower_id FROM followers WHERE user_id=:userid AND follower_id=:followerid', array(
+                        ':userid' => $user_id, ':followerid' => $followerid
                     ))) 
 					{
-				
+				 
                         //insert query to follow the user
                         DatabaseConnector::query('INSERT INTO followers (user_id, follower_id) VALUES (:userid, :followerid)', array(
                             ':userid' => $user_id,
@@ -141,7 +141,7 @@ $usersprofile = true;
 					    if ($invitedMe) {
 			
 						//remove the invite
-                        DatabaseConnector::query('DELETE FROM invites WHERE user_id=:userid AND  inviter_id=:inviterid', array(
+                        DatabaseConnector::query('DELETE FROM invites WHERE user_id=:userid AND inviter_id=:inviterid', array(
                             ':userid' => $inviterid,
                             ':inviterid' => $user_id
                         ));		
@@ -174,8 +174,8 @@ $usersprofile = true;
                 if ($usersprofile != true) {
                     
                     //check if the user is following that user
-                    if (DatabaseConnector::query('SELECT follower_id FROM followers WHERE user_id=:userid', array(
-                        ':userid' => $user_id
+                    if (DatabaseConnector::query('SELECT follower_id FROM followers WHERE user_id=:userid AND follower_id=:followerid', array(
+                        ':userid' => $user_id, ':followerid' => $followerid
                     ))) {
 					
 						
@@ -304,5 +304,8 @@ $usersprofile = true;
 catch (Exception $e) {
     $GLOBALS['errors'][] = $e->getMessage();
 }
+
+
+ include_once('components/post/post.php'); 
 
 ?>
