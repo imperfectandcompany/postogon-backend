@@ -1,6 +1,6 @@
  <?php foreach($dbposts as $p): ?>  
 <?php
-            //get the id of the user we are trying to follow
+            //get the id of the user
             $username= User::getUsername($p['user_id']);
 			//get status of the poster		
 			$status = User::getUserStatus($username);
@@ -35,7 +35,8 @@
       <div class="mt-4 mb-4">
          <p class="ml-5 mr-5 text-sm antialiased break-words sm:subpixel-antialiased md:antialiased">
             <div class="posts">
-<?php echo $p['body'];?>
+			<!-- prevent user from posting html -->
+<?php echo htmlspecialchars($p['body']);?>
 </div>
 
          </p>
@@ -55,12 +56,28 @@
       <div class="flex w-full justify-start border-gray-100 border-opacity-50">
          <!-- left -->
          <div class="flex justify-start w-full ml-1">
-            <div class="transition animate-bounce  focus:opacity-50 focus:text-blue-500 focus:outline-none  select-none"><?php if($p['to_whom'] == 2):?>🔓<?php endif?></div>
+		             <span class="text-gray-400">
+			            <?php echo $p['likes']?>
+			</span>
+            <div class="transition animate-bounce  focus:opacity-50 focus:text-blue-500 focus:outline-none ml-2 select-none"><?php if($p['to_whom'] == 2):?>🔓<?php endif?></div>
+			
          </div>
          <!-- likes -->
          <div class="flex justify-end w-full mr-1 select-none">
-            <span class="text-gray-400">
-            <?php echo $p['likes']?> likes                    </span>
+		 
+					   <form method="POST">
+					   <input type="hidden" name="username" value="<?php echo $username;?>"> </input>					   
+					   <input type="hidden" name="postid" value="<?php echo $p['id'];?>"> </input>
+					   <?php if (posts::isLiked($p['id'])): ?>
+                     <button type="submit" name="unlike" value="Unlike" class="text-blue-700 mr-1  font-bold focus:outline-none">
+                     Unlike
+                     </button>
+					   <?php elseif(!posts::isLiked($p['id'])): ?>
+                     <button type="submit" name="like" value="Like" class="text-blue-700 mr-1  font-bold focus:outline-none">
+                     Like
+                     </button>
+					 <?php endif; ?>
+					</form>
          </div>
       </div>
    </div>

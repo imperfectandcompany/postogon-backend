@@ -9,7 +9,7 @@
             <nav id="nav" class="px-1 pt-6 overflow-y-auto font-medium text-base sm:px-3 xl:px-5 lg:text-sm pb-10 lg:pt-10 lg:pb-14 sticky?lg:h-(screen-18)">
                <ul>
                   <li>
-                     <a href="./home" class="flex items-center px-3 hover:text-gray-400 transition-colors duration-200 mb-4">
+                     <a href="./home" class="flex items-center px-3 font-bold hover:text-gray-400 transition-colors duration-200 mb-4">
                         <div class="mr-3 rounded-md bg-gradient-to-br from-green-400 font-medium to-cyan-500">
 
 

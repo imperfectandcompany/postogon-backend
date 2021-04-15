@@ -11,6 +11,7 @@
    
    include("../functions/functions.general.php");
    include("../classes/class.user.php");		
+   include("../classes/class.posts.php");	   
    include("../classes/class.database.php");
    include("../classes/class.general.php");
    
@@ -429,6 +430,12 @@ $(document).find('textarea').each(function () {
 		},
 	}
 }
+</script>
+
+<script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
 </script>
 
 	  
