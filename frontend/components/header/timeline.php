@@ -1,7 +1,7 @@
             <div class="z-50 flex justify-end flex-shrink-0 px-6 py-4">
 			<div class="flex mr-auto">
                <a href="."><img class="h-8 w-8" style="filter:brightness(0.1)" src="./assets/logo.svg" alt="postogon logo"></a>
-			   <a href="."><h1 class="px-6 text-xl font-semibold cursor-pointer">Home</h1></a>
+			   <a href="."><h1 class="px-6 text-xl font-semibold cursor-pointer">Timeline</h1></a>
 			   </div>
 			   <div class="flex ">
                <button @click="open = !open" :aria-expanded="open ? 'true' : 'false'" :class="{'font-semibold': open, 'active': open}" class="p-1 px-2 text-white transition duration-200 bg-red-500 rounded-md cursor-pointer focus:outline-none" aria-expanded="false">

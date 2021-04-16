@@ -1,5 +1,5 @@
-private/config.php
-config.php
+private/loader.php
+loader.php
 private/classes/class.database.php
 classes/class.database.php
 private/classes/class.database.php

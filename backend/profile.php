@@ -53,6 +53,8 @@ try {
             
             //get the id of the user we are trying to follow
             $user_id= User::getUserId($GLOBALS['url_loc'][2]);
+			//retrieve users post
+			$dbposts = posts::fetch_userPosts("DESC", $user_id);			
 			//get id of the user that is logged in
             $followerid = User::isLoggedIn();
             $inviterid = User::isLoggedIn();

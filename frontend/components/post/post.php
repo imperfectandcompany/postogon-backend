@@ -1,4 +1,4 @@
- <?php foreach($dbposts as $p): ?>  
+<?php foreach($dbposts as $p): ?>  
 <?php
             //get the id of the user
             $username= User::getUsername($p['user_id']);
@@ -6,7 +6,7 @@
 			$status = User::getUserStatus($username);
 ?>
    <!-- post -->
-   <div class="bg-white rounded post transition border-6  mb-2 shadow-sm md:px-4 md:py-4 <?php if($GLOBALS['url_loc'][1] === "home"){ echo ("p-2 lg:ml-44 lg:mr-44 xl:ml-96 xl:mr-96  ");} if($GLOBALS['url_loc'][1] === "profile"){ echo ("mx-4");}?>" id="normalpost">
+   <div class="bg-white rounded post transition border-6  mb-2 shadow-sm md:px-4 md:py-4 <?php if($GLOBALS['url_loc'][1] === "home" || "timeline"){ echo ("p-2 lg:ml-44 lg:mr-44 xl:ml-96 xl:mr-96  ");} if($GLOBALS['url_loc'][1] === "profile"){ echo ("mx-4");}?>" id="normalpost">
       <div class="flex">
          <!-- avatar -->
          <div class="relative">
@@ -57,7 +57,7 @@
          <!-- left -->
          <div class="flex justify-start w-full ml-1">
 		             <span class="text-gray-400">
-			            <?php echo $p['likes']?>
+			            <?php echo posts::countPostLikes($p['id']);?>
 			</span>
             <div class="transition animate-bounce  focus:opacity-50 focus:text-blue-500 focus:outline-none ml-2 select-none"><?php if($p['to_whom'] == 2):?>🔓<?php endif?></div>
 			
