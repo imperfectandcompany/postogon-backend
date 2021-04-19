@@ -15,7 +15,6 @@ switch ($GLOBALS['url_loc'][1])
         header("location:../public_html/login");
     break;
     case "home":
-        $dbposts = posts::fetch_posts("DESC");
         $PAGE_TITLE = "Home";
         $BACKEND = "home";
         $FRONTEND = "home";		
@@ -24,13 +23,8 @@ switch ($GLOBALS['url_loc'][1])
     break;
     case "createusername":
         $PAGE_TITLE = "Create Username";
-        $BACKEND = "createusername";
-        $FRONTEND = "createusername";	
-    break;
-    case "signup":
-        $PAGE_TITLE = "Sign up";
-        $BACKEND = "signup";
-        $FRONTEND = "signup";	
+        $BACKEND = "create_a_user";
+        $FRONTEND = "create_a_user";	
     break;
     case "settings":
         $PAGE_TITLE = "Settings";
@@ -58,7 +52,6 @@ switch ($GLOBALS['url_loc'][1])
     break;
     case "timeline":
         $PAGE_TITLE = "Timeline";
-        $dbposts = posts::getPublicPosts(User::isLoggedIn() , "DESC");
         $BACKEND = "timeline";
         $FRONTEND = "timeline";
     break;

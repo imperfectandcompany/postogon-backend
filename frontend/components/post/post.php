@@ -59,7 +59,7 @@
 		             <span class="text-gray-400">
 			            <?php echo posts::countPostLikes($p['id']);?>
 			</span>
-            <div class="transition animate-bounce  focus:opacity-50 focus:text-blue-500 focus:outline-none ml-2 select-none"><?php if($p['to_whom'] == 2):?>🔓<?php endif?></div>
+            <div class="transition animate-bounce focus:opacity-50 focus:text-blue-500 focus:outline-none ml-2 select-none"><?php if(posts::isPrivate($p['id'], $p['user_id'])):?>🔓<?php endif?></div>
 			
          </div>
          <!-- likes -->

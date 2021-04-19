@@ -3,8 +3,11 @@
 class posts {
 
 public static function fetch_posts($order){	
-return DatabaseConnector::query('SELECT * FROM posts ORDER BY posted_on '. $order);
+return DatabaseConnector::query('SELECT * FROM posts WHERE to_whom = 1 ORDER BY posted_on '. $order);
 }
+
+
+
 
 public static function fetch_userPosts($order, $user_id){	
 	return DatabaseConnector::query('SELECT * FROM posts WHERE user_id=:userid ORDER BY posted_on '.$order, array(':userid'=>$user_id));
@@ -52,9 +55,31 @@ AND to_whom = 1
 AND follower_id = '.$user_id.' ORDER BY posts.posted_on '.$order);
 }
 
+public static function getBothPosts($user_id, $order){
+return DatabaseConnector::query('SELECT posts.body, posts.user_id, users.`status`, posts.id, posts.likes, posts.posted_on, users.`username` FROM users, posts , followers
+WHERE posts.user_id = followers.user_id
+AND users.id = posts.user_id
+AND follower_id = '.$user_id.' ORDER BY posts.posted_on '.$order);
+}
+
+public static function getPrivatePosts($user_id, $order){
+return DatabaseConnector::query('SELECT posts.body, posts.user_id, users.`status`, posts.id, posts.likes, posts.posted_on, users.`username` FROM users, posts , contacts
+WHERE posts.user_id = contacts.contact_id
+AND users.id = posts.user_id
+AND to_whom = 2
+AND contacts.user_id = '.$user_id.' ORDER BY posts.posted_on '.$order);
+}
+
 public static function isLiked($postid){
 	$user_id = User::isLoggedIn();	
 	if(DatabaseConnector::query('SELECT user_id FROM post_likes WHERE post_id=:postid AND user_id=:userid', array(':postid'=>$postid,':userid'=>$user_id))){
+	return true;
+	}
+	return false;
+}
+
+public static function isPrivate($postid, $postuser){
+	if(DatabaseConnector::query('SELECT to_whom FROM posts WHERE id=:postid AND user_id=:userid', array(':postid'=>$postid,':userid'=>$postuser))[0]['to_whom'] == '2'){
 	return true;
 	}
 	return false;

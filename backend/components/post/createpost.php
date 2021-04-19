@@ -8,7 +8,7 @@ if (isset($_POST['post'])){
 		die('incorrect length!');
 	}
 	
-	DatabaseConnector::query('INSERT INTO timeline (body, user_id, to_whom, likes, posted_on) VALUES (:body, :userid, :towhom, 0,  UNIX_TIMESTAMP())', array(':body'=>$postbody, ':userid'=>$userid, ':towhom'=>$to_whom));
+	DatabaseConnector::query('INSERT INTO posts (body, user_id, to_whom, likes, posted_on) VALUES (:body, :userid, :towhom, 0,  UNIX_TIMESTAMP())', array(':body'=>$postbody, ':userid'=>$userid, ':towhom'=>$to_whom));
 	header('location: ./home');
 }
 

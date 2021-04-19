@@ -25,7 +25,8 @@
 px`)
       root.style.setProperty('--real-vh', (window.innerHeight / 100) + "px");
     }
-  </script>	  
+  </script>	 
+<script src='https://www.google.com/recaptcha/api.js' async defer></script>  
   <script defer>
     updateRealViewportDimensions()
     const vhChangeEventTypes = [
