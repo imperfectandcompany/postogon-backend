@@ -1,4 +1,3 @@
-
       <div class="bg-white rounded p-2 mb-2 shadow-sm md:px-4 md:py-4 lg:ml-44 lg:mr-44 xl:ml-96 xl:mr-96 transition border-6">
         <form method="post">
             <div x-data="{ count: 0 }" x-init="count = $refs.countme.value.length">
@@ -10,11 +9,11 @@
                      </div>
                      <!-- END AVATAR MEDIUM -->
                   </div>
-<textarea id="text" name="postbody" class="animate-pulse w-full text-lg h-6 transition p-2 bg-white resize-none focus:outline-none char-limiter" maxlength="280" placeholder="What's Poppin'." rows="3" spellcheck="false" x-on:keyup="count = $refs.countme.value.length" x-ref="countme" style="height:44px;overflow-y:hidden;"></textarea>
+<textarea id="text" name="postbody" class="animate-pulse w-full text-lg h-6 transition p-2 bg-white resize-none focus:outline-none char-limiter" maxlength="180" placeholder="What's Poppin'." rows="3" spellcheck="false" x-on:keyup="count = $refs.countme.value.length" x-ref="countme" style="height:44px;overflow-y:hidden;"></textarea>
                </div>
 			   
                <div class="flex text-gray-500 ">
-                  <div class="ml-auto text-xs font-semibold text-gray-400 count"><span x-html="count">0</span> / <span x-html="$refs.countme.maxLength">280</span></div>	
+                  <div class="ml-auto text-xs font-semibold text-gray-400 count"><span x-html="count">0</span> / <span x-html="$refs.countme.maxLength">180</span></div>	
             </div>				  
 			  <div class="flex ">
 <fieldset x-init="init()" x-data="window.RadioFields()">
@@ -62,8 +61,3 @@
             </div>
          </form>
       </div>
-
-   
-   <script>
-   
-   </script>

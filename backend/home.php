@@ -3,14 +3,17 @@ if (!User::isLoggedin()){
 	header("Location: https://postogon.com/lit/public_html/login");
 }
 
-$result = "global";
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $result = htmlspecialchars($_REQUEST['view']);
+//different tabs / views			
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+	if(isset($_REQUEST['view'])){
+	$result = htmlspecialchars($_REQUEST['view']);				
+	} else {
+	$result = "global";	
+	}
 }
 
 if($result == "global"){
-        $dbposts = posts::fetch_posts("DESC");	
+        $dbposts = posts::fetch_PublicPosts("DESC");	
 }
 
 if($result == "all"){

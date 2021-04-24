@@ -12,12 +12,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@ryangjchandler/alpine-clipboard@1.x.x/dist/alpine-clipboard.js">
   </script>		 		 
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js">
-  </script>
-  <script src="https://cdn.jsdelivr.net/gh/alpine-collective/alpine-magic-helpers@0.5.x/dist/component.min.js">
-  </script>
-  <script defer src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js">
-  </script>
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
   <script>
     let root = document.documentElement;
     function updateRealViewportDimensions() {
@@ -25,7 +20,12 @@
 px`)
       root.style.setProperty('--real-vh', (window.innerHeight / 100) + "px");
     }
-  </script>	 
+  </script>
+<style>
+  [x-cloak] { 
+      display: none !important;
+   }
+</style>  
 <script src='https://www.google.com/recaptcha/api.js' async defer></script>  
   <script defer>
     updateRealViewportDimensions()

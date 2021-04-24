@@ -4,7 +4,7 @@
 
    <div class="lg:flex">
 
-	  			         <?php include('components/sidebar/sidebar.php') ?>	
+	  			         <?php include_once('components/sidebar/sidebar.php') ?>	
 	  
 	  
       <div id="content-wrapper" class="min-w-0 w-full flex-auto sm:px-6 xl:px-8 top-10 pb-16 lg:static lg:max-h-full lg:overflow-visible">
@@ -13,7 +13,7 @@
 					<!-- left -->
 					
 						<div>
-	  			         <?php include('components/sidebar/home.php') ?>	
+	  			         <?php include_once('components/sidebar/home.php') ?>	
 						</div>
 				  <!-- right -->
                   <div class="font-medium text-gray-900">View all posts</div>
@@ -25,8 +25,8 @@
 
 
                <div class="bg-white ">
-			         <?php include('components/post/createpost.php') ?>	
-					<?php include('components/post/post.php') ?>
+			         <?php include_once('components/post/createpost.php') ?>	
+					<?php include_once('components/post/post.php') ?>
 			   </div>
             </section>
 

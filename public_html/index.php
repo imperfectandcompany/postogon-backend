@@ -1,15 +1,5 @@
 <?php
 include("../loader.php");
-if(!ob_start("ob_gzhandler")) ob_start();
-session_start();
-error_reporting(E_ERROR | E_WARNING | E_PARSE);
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-include("../functions/functions.general.php");
-include("../classes/class.user.php");		
-include("../classes/class.posts.php");	   
-include("../classes/class.database.php");
-include("../classes/class.general.php");
 include ('../config.php');   
 if(isset($BACKEND)){
 include('../backend/'.$BACKEND.'.php');	
@@ -88,11 +78,16 @@ include('../backend/'.$BACKEND.'.php');
       $(document).find('textarea').each(function () {
         var offset = this.offsetHeight - this.clientHeight;
         $(this).on('keyup input focus', function () {
-          $(this).css('height', 'auto').css('height', this.scrollHeight + offset);
-        }
-                  );
-      }
-                                       );
+          $(this).css('height', '30px').css('height', this.scrollHeight + offset);
+        });
+		
+        $(this).on('blur', function () {
+          $(this).animate({"height":"40px",}, "fast");
+        });			
+		
+      });
+	  
+	  
       $("#ready").hide();
       $('#text').on('input propertychange', function () {
         if ($(this).val() !== "") {
@@ -105,8 +100,20 @@ include('../backend/'.$BACKEND.'.php');
           $("#submitpost").addClass("p-1 px-4 cursor-default font-semibold text-white transition transition-colors bg-red-300 rounded-md btn duration-200 focus:outline-none");
           document.getElementById("submitpost").disabled = true;
         }
-      }
-                   );
+      });
+				   
+      $('#ctext').on('input propertychange', function () {
+        if ($(this).val() !== "") {
+          $("#submitcomment").removeClass("text-gray-200 cursor-pointer");
+          $("#submitcomment").addClass("text-gray-800 cursor-default");
+          document.getElementById("submitcomment").disabled = false;
+        }
+        else {
+          $("#submitcomment").removeClass("text-gray-800 cursor-pointer");
+          $("#submitcomment").addClass("text-gray-200 cursor-not-allowed");
+          document.getElementById("submitcomment").disabled = true;
+        }
+      });			   
     </script>
     <?php endif;?>
     <script>

@@ -88,7 +88,7 @@ function zdateRelative($date)
 }
 
 
-
+//for login and sign up page
 function password(){
 switch($GLOBALS['url_loc'][1]){
     case "signup":		
@@ -157,3 +157,13 @@ passwordToggle.addEventListener('change', function() {
     break; 	
 }
 }
+
+//for redirect parameters
+function preserve_qs() {
+    if (empty($_SERVER['QUERY_STRING']) && strpos($_SERVER['REQUEST_URI'], "?") === false) {
+        return "";
+    }
+    return "?" . $_SERVER['QUERY_STRING'];
+}
+
+

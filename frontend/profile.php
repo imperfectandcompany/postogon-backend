@@ -1,7 +1,3 @@
-<?php
-   /*Call our notification handling*/ include("../frontend/sitenotif.php");
-   ?>
-
    <div class="lg:flex">
 			         <?php include('components/sidebar/sidebar.php') ?>	
 	  
@@ -21,7 +17,7 @@
    
 <div class="flex-1 ">
 
-<div class="flex-1 flex flex-col border-b ">
+<div class="flex-1 flex flex-col">
 <div class="mx-auto bg-no-repeat md:rounded-l-sm rounded-b-none md:rounded-t-3xl bg-cover bg-center relative w-full" style="background-image:url('https://images.unsplash.com/photo-1517639191054-4d31c81e0cc0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1350&amp;q=80'); height: 25vh; max-height:460px;">
 
 <div class="flex flex-shrink p-2 text-white text-xs sm:text-sm antialiased sm:subpixel-antialiased md:antialiased	md:text-base justify-center md:justify-end w-full backdrop border-t absolute bottom-0 select-none">
@@ -117,7 +113,7 @@
 					 <?php //if user is verified, list that the user is verified
 					 if($verified):?> <div class="ml-1 text-xs p-1 text-gray-400 uppercase bg-gray-100 text-center"><span><?php echo 'verified'; ?></span></div><?php endif; ?>
                   </div>
-				  <?php if($isFollowingMe && $isMutual && !$isContact && $invitedMe): ?>
+				  <?php if($isFollowingMe && $isMutual && !$isTheirContact && $invitedMe): ?>
 			                       <div class="mb-1 select-none">
 				  					   <form action="../profile/<?php echo $profile;?>" method="post">									   
 <div class="flex md:items-center flex-col md:flex-row">
@@ -159,7 +155,7 @@
 				  <?php if($isFollowingMe && $isMutual && !$isInvited && $isTheirContact && $isContact && !$invitedMe): ?>
 				                       <div class="mt-1 select-none"><span class="p-1 text-xs bg-gray-100 text-gray-800 font-semibold transition hover:text-gray-700">Mutual Contacts</span></div>
 				  <?php endif; ?>				  
-				  <?php if($isFollowingMe && $isMutual && !$isInvited && !$isTheirContact && $isContact && !$invitedMe): ?>
+				  <?php if($isFollowingMe && $isMutual && !$isInvited && !$isTheirContact && $isContact): ?>
 				                       <div class="mt-1 select-none"><span class="p-1 text-xs bg-gray-100 text-gray-800 font-semibold transition hover:text-gray-700">Your contact</span></div>
 				  <?php endif; ?>				  
 				  <?php if($isFollowingMe && $isMutual && $isInvited && !$isContact): ?>
@@ -233,12 +229,20 @@
          </div>
 
 <!-- menu -->	  
-<div class="border-b border-gray-100">
-         <nav class="flex justify-center select-none">
-            <a href="#" class="px-3 py-1 text-base font-medium leading-5 border-b-2 border-blue-500 focus:outline-none cursor-default">Overview</a>
-            <a href="#" class="px-3 py-2 text-base border-b-2 border-white hover:border hover:border-b hover:border-gray-300 font-normal leading-5 text-gray-500 focus:outline-none transition duration-150 ease-in-out">Media</a>
-            <a href="#" class="px-3 py-2 text-base border-b-2 border-white hover:border hover:border-b hover:border-gray-300 font-normal leading-5 text-gray-500 focus:outline-none transition duration-150 ease-in-out">Feed 1</a>		
-            <a href="#" class="px-3 py-2 text-base border-b-2 border-white hover:border hover:border-b hover:border-gray-300 font-normal leading-5 text-gray-500 focus:outline-none transition duration-150 ease-in-out">Feed 2</a>
+<div class="">
+         <nav class="flex justify-center select-none border-b border-gray-100 mb-2">
+                     <form method="get" class="<?php if($result == "overview"){ echo "px-3 py-1 text-base font-medium leading-5 border-b-2 border-blue-500 focus:outline-none cursor-default";} else { echo "px-3 py-2 text-base border-b-2 border-white hover:border hover:border-b hover:border-gray-100 font-normal leading-5 text-gray-500 focus:outline-none transition duration-150 ease-in-out"; }?>">
+                        <button type="submit" name="tab" value="overview" class=" focus:outline-none">Overview</button>
+                     </form>
+                     <form method="get" class="<?php if($result == "feed1"){ echo "px-3 py-1 text-base font-medium leading-5 border-b-2 border-blue-500 focus:outline-none cursor-default";} else { echo "px-3 py-2 text-base border-b-2 border-white hover:border hover:border-b hover:border-gray-100 font-normal leading-5 text-gray-500 focus:outline-none transition duration-150 ease-in-out"; }?>">
+                        <button type="submit" name="tab" value="feed1" class="focus:outline-none">Feed 1</button>
+                     </form>
+					 <!-- only show to contact -->
+					 <?php if($isTheirContact || $usersprofile || $nopermission): ?>
+                     <form method="get" class="<?php if($result == "feed2"){ echo "px-3 py-1 text-base font-medium leading-5 border-b-2 border-blue-500 focus:outline-none cursor-default";} else { echo "px-3 py-2 text-base border-b-2 border-white hover:border hover:border-b hover:border-gray-100 font-normal leading-5 text-gray-500 focus:outline-none transition duration-150 ease-in-out"; }?>">
+                        <button type="submit" name="tab" value="feed2" class="focus:outline-none">Feed 2</button>
+                     </form>
+					<?php endif; ?>
          </nav>
       </div>
 	  

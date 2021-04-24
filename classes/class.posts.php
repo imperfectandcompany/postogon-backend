@@ -2,18 +2,21 @@
 
 class posts {
 
-public static function fetch_posts($order){	
+public static function fetch_PublicPosts($order){	
 return DatabaseConnector::query('SELECT * FROM posts WHERE to_whom = 1 ORDER BY posted_on '. $order);
 }
 
-
-
-
-public static function fetch_userPosts($order, $user_id){	
+public static function fetch_userBothPosts($order, $user_id){	
 	return DatabaseConnector::query('SELECT * FROM posts WHERE user_id=:userid ORDER BY posted_on '.$order, array(':userid'=>$user_id));
 }
 
+public static function fetch_userPublicPosts($order, $user_id){	
+	return DatabaseConnector::query('SELECT * FROM posts WHERE user_id=:userid AND to_whom = 1 ORDER BY posted_on '.$order, array(':userid'=>$user_id));
+}
 
+public static function fetch_userPrivatePosts($order, $user_id){	
+	return DatabaseConnector::query('SELECT * FROM posts WHERE user_id=:userid AND to_whom = 2 ORDER BY posted_on '.$order, array(':userid'=>$user_id));
+}
 
 public static function likePost($postid){	
 	$user_id = User::isLoggedIn();
@@ -48,26 +51,26 @@ public static function unlikePost($postid){
 // the third line takes the column user_id of table posts and matches it with the user_id column from the followers table. this allows us to match the username to the owner of the post.
 // the last condition ensures that the follower of the user_id pertains to the user logged in. When executed, this adds the two selected columns to an array. showing the posts of the people that the user is following
 public static function getPublicPosts($user_id, $order){
-return DatabaseConnector::query('SELECT posts.body, posts.user_id, users.`status`, posts.id, posts.likes, posts.posted_on, users.`username` FROM users, posts , followers
+return DatabaseConnector::query('SELECT DISTINCT posts.body, posts.user_id, users.`status`, posts.id, posts.likes, posts.posted_on, users.`username` FROM users, posts , followers
 WHERE posts.user_id = followers.user_id
 AND users.id = posts.user_id
 AND to_whom = 1
-AND follower_id = '.$user_id.' ORDER BY posts.posted_on '.$order);
+AND follower_id = '.$user_id.' OR posts.user_id = '.$user_id.' AND users.id = posts.user_id AND to_whom = 1 ORDER BY posts.posted_on '.$order);
 }
 
 public static function getBothPosts($user_id, $order){
-return DatabaseConnector::query('SELECT posts.body, posts.user_id, users.`status`, posts.id, posts.likes, posts.posted_on, users.`username` FROM users, posts , followers
+return DatabaseConnector::query('SELECT DISTINCT posts.body, posts.user_id, users.`status`, posts.id, posts.likes, posts.posted_on, users.`username` FROM users, posts , followers
 WHERE posts.user_id = followers.user_id
 AND users.id = posts.user_id
-AND follower_id = '.$user_id.' ORDER BY posts.posted_on '.$order);
+AND follower_id = '.$user_id.' OR posts.user_id = '.$user_id.' AND users.id = posts.user_id ORDER BY posts.posted_on '.$order);
 }
 
 public static function getPrivatePosts($user_id, $order){
-return DatabaseConnector::query('SELECT posts.body, posts.user_id, users.`status`, posts.id, posts.likes, posts.posted_on, users.`username` FROM users, posts , contacts
+return DatabaseConnector::query('SELECT DISTINCT posts.body, posts.user_id, users.`status`, posts.id, posts.likes, posts.posted_on, users.`username` FROM users, posts , contacts
 WHERE posts.user_id = contacts.contact_id
 AND users.id = posts.user_id
 AND to_whom = 2
-AND contacts.user_id = '.$user_id.' ORDER BY posts.posted_on '.$order);
+AND contacts.user_id = '.$user_id.' OR posts.user_id = '.$user_id.' AND users.id = posts.user_id AND to_whom = 2 ORDER BY posts.posted_on '.$order);
 }
 
 public static function isLiked($postid){
@@ -86,9 +89,14 @@ public static function isPrivate($postid, $postuser){
 }
 
 public static function countPostLikes($postid){	
-	$user_id = User::isLoggedIn();
 	if(DatabaseConnector::query('SELECT count(*) as total from post_likes WHERE post_id=:postid', array(':postid'=>$postid))){
 	return DatabaseConnector::query('SELECT count(*) as total from post_likes WHERE post_id=:postid', array(':postid'=>$postid));	
+	}
+}
+
+public static function countPostComments($postid){	
+	if(DatabaseConnector::query('SELECT count(*) as total from comments WHERE post_id=:postid', array(':postid'=>$postid))){
+	return DatabaseConnector::query('SELECT count(*) as total from comments WHERE post_id=:postid', array(':postid'=>$postid));	
 	}
 }
 

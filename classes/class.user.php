@@ -168,12 +168,29 @@ public static function isUserFollowingMutual($user1, $user2)
 if(self::isUserFollowing($user1, $user2)) {
 	//if user2 is following user2
 if(self::isUserFollowing($user2, $user1)) {
-			//returned true if user is not following each other
+			//returned true if user is following each other
 		return true;
 		}	
 	}
 	else {
 		//returned false if user is not following each other
+	return false;
+	}
+}
+
+//function to see if a user is mutually a contact
+public static function isUserContactMutual($user1, $user2)
+{
+	//if user1 is following user2
+if(self::isUserContact($user1, $user2)) {
+	//if user2 is following user2
+if(self::isUserContact($user2, $user1)) {
+			//returned true if user is following each other
+		return true;
+		}	
+	}
+	else {
+		//returned false if user is not contacts with each other
 	return false;
 	}
 }

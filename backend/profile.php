@@ -54,7 +54,8 @@ try {
             //get the id of the user we are trying to follow
             $user_id= User::getUserId($GLOBALS['url_loc'][2]);
 			//retrieve users post
-			$dbposts = posts::fetch_userPosts("DESC", $user_id);			
+				
+			
 			//get id of the user that is logged in
             $followerid = User::isLoggedIn();
             $inviterid = User::isLoggedIn();
@@ -64,9 +65,42 @@ try {
 			$last_seen = User::getUserLastSeen($GLOBALS['url_loc'][2]);
 			$status = User::getUserStatus($GLOBALS['url_loc'][2]);
 			
-if ($user_id === $followerid) {
-$usersprofile = true;
-}
+			if ($user_id === $followerid) {
+			$usersprofile = true;
+			}
+			
+			//different tabs / views			
+			if ($_SERVER["REQUEST_METHOD"] == "GET") {
+				if(isset($_REQUEST['tab'])){
+				$result = htmlspecialchars($_REQUEST['tab']);				
+				} else {
+				$result = "overview";	
+				}
+			}
+
+			if($result == "overview"){
+				if($isTheirContact || $usersprofile){		
+					$dbposts = posts::fetch_userBothPosts("DESC", $user_id);									
+				} else {
+					$dbposts = posts::fetch_userPublicPosts("DESC", $user_id);	
+				}
+			}
+
+			if($result == "media"){
+
+			}
+
+			if($result == "feed1"){
+					$dbposts = posts::fetch_userPublicPosts("DESC", $user_id);	
+			}
+
+			if($result == "feed2"){
+				if($isTheirContact || $usersprofile){		
+					$dbposts = posts::fetch_userPrivatePosts("DESC", $user_id);									
+				} else {
+					$noPermission = true;							
+				}
+			}			
 
 
             //check if follow button was hit

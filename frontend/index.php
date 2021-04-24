@@ -16,69 +16,223 @@
 		@-webkit-keyframes fade-in{0%{opacity:0}100%{opacity:1}}@keyframes fade-in{0%{opacity:0}100%{opacity:1}}
 				
 	</style>
-
+	
+	<script>
+	// Function to toggle header menu in mobile view.
+function toggleMenu(flag) {
+    let value = document.getElementById("menu");
+    if (flag) {
+        value.classList.remove("hidden");
+    } else {
+        value.classList.add("hidden");
+    }
+}
+</script>
 
 
 <div class="flex flex-col min-h-screen pb-14 bg-right leading-normal tracking-normal text-gray-900">
 
-<header class="w-full container mx-auto px-6 pt-6">
-		<div class="flex justify-between items-center">
-			<a class="flex items-center text-purple-600 no-underline hover:no-underline font-bold text-2xl lg:text-4xl select-none"  href="./"> 
-			<!-- Brand Icon-->
-<svg class="h-8 fill-current text-purple-600 pr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 601 572">
-<path d="M549.528 354.832C587.161 317.204 549.528 231.128 549.528 163.867C549.528 96.6061 525.301 139.644 473.555 87.9045C421.81 36.1652 428.395 77.7918 374.533 23.936C320.67 -29.9199 277.627 23.936 199.773 23.936C121.684 23.936 59.824 163.867 59.824 163.867C-93.5319 163.867 104.278 326.611 38.4201 392.461C-27.4383 458.311 108.277 462.309 183.544 537.566C258.81 612.823 342.309 537.566 438.98 537.566C535.886 537.566 417.576 427.267 549.293 427.267C681.48 427.502 511.894 392.461 549.528 354.832ZM426.043 357.184C359.715 357.184 419.222 412.686 370.534 412.686C321.846 412.686 279.744 450.55 241.875 412.686C204.007 374.822 135.561 372.706 168.725 339.546C201.89 306.385 102.397 224.308 179.545 224.308C179.545 224.308 210.593 153.755 250.108 153.755C289.387 153.755 311.026 126.709 338.075 153.755C365.124 180.8 361.831 159.869 387.94 185.974C414.048 212.079 426.278 190.442 426.278 224.308C426.278 258.174 445.33 301.447 426.278 320.496C406.991 339.546 492.372 357.184 426.043 357.184Z"/>
-</svg>
-			<!-- Text -->
-				 POSTOGON
-			</a>
-
-<!-- Search bar / Hidden on mobile devices -->
-			<div class="hidden md:block  ">		
-<form class="border rounded flex" autocomplete="off" action="results.php" method="get">
-    <input type="text" name="search_query" class="px-4 py-2 focus:ring-inset focus:ring-2 focus:outline-none select-none focus:ring-purple-400 focus:ring-opacity-80" placeholder="Search..."/>
-	<!-- button with search icon -->
-    <button type="submit" class="flex items-center focus:outline-none text-gray-400 hover:text-gray-900 justify-center px-4 border-l">
-      <svg class="h-4 w-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"></path></svg>
-    </button>
-  </form>
-			</div>
-			
-		</div>
-</header>
-
-
-	<div class="container pt-24 md:pt-32 px-6 mx-auto flex flex-wrap flex-col md:flex-row items-center">
-		
-
-		<main class="flex flex-col w-full xl:w-2/5 justify-center lg:items-start overflow-y-hidden">
-			<h1 class="my-4 text-3xl md:text-5xl text-purple-800 font-bold leading-tight text-center md:text-right slide-in-bottom-h1">We are trying our best</h1>
-			<p class="leading-normal text-base md:text-2xl mb-8 text-center md:text-right slide-in-bottom-subtitle">Wow, you're early...this is just beginning.!</p>
-		
-
-			<div class="flex w-full justify-center md:justify-start pb-24 lg:pb-0 space-x-2 fade-in">
-				    <a class="rounded border border-purple-500 bg-white hover:border-purple-700 py-2 px-4 text-purple-500 focus:outline-none" href="./signup">Sign Up</a>
-				    <a class="rounded border border-purple-500 bg-white hover:border-purple-700 py-2 px-4 text-purple-500 focus:outline-none" href="./login">Login</a>
-			</div>
-
-		</div>
-
-<div class="md:flex h-10 w-full pt-16 pb-6 mb-0 items-center text-center md:text-right text-sm fade-in">
-        <div class="py-3 text-gray-500 select-none text-center mx-auto border-b md:border-b-0">
-© 2021 Imperfect and Company
-        </div>
+       <nav class="w-full">
+<div class="container mx-auto px-6 flex items-center justify-between">
+                    <div class="flex items-center">
+						<svg aria-label="Home" class="cursor-pointer w-8 sm:w-auto" id="logo"enable-background="new 0 0 300 300" height="54" width="53" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 601 572">
+							<path d="M549.528 354.832C587.161 317.204 549.528 231.128 549.528 163.867C549.528 96.6061 525.301 139.644 473.555 87.9045C421.81 36.1652 428.395 77.7918 374.533 23.936C320.67 -29.9199 277.627 23.936 199.773 23.936C121.684 23.936 59.824 163.867 59.824 163.867C-93.5319 163.867 104.278 326.611 38.4201 392.461C-27.4383 458.311 108.277 462.309 183.544 537.566C258.81 612.823 342.309 537.566 438.98 537.566C535.886 537.566 417.576 427.267 549.293 427.267C681.48 427.502 511.894 392.461 549.528 354.832ZM426.043 357.184C359.715 357.184 419.222 412.686 370.534 412.686C321.846 412.686 279.744 450.55 241.875 412.686C204.007 374.822 135.561 372.706 168.725 339.546C201.89 306.385 102.397 224.308 179.545 224.308C179.545 224.308 210.593 153.755 250.108 153.755C289.387 153.755 311.026 126.709 338.075 153.755C365.124 180.8 361.831 159.869 387.94 185.974C414.048 212.079 426.278 190.442 426.278 224.308C426.278 258.174 445.33 301.447 426.278 320.496C406.991 339.546 492.372 357.184 426.043 357.184Z"></path>
+						</svg>						
+                        <p class="ml-2 lg:ml-4 text-base lg:text-2xl font-bold text-gray-800">Postogon</p>
+                    </div>
+                    <div>
+                        <div onclick="toggleMenu(true)" class="sm:block md:hidden lg:hidden text-gray-500 hover:text-gray-700 focus:text-gray-700 focus:outline-none">
+                            <svg aria-haspopup="true" aria-label="Main Menu" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z"></path>
+                                <line x1="4" y1="8" x2="20" y2="8"></line>
+                                <line x1="4" y1="16" x2="20" y2="16"></line>
+                            </svg>
+                        </div>
+                        <div id="menu" class="md:block lg:block hidden">
+                            <div onclick="toggleMenu(false)" class="block md:hidden lg:hidden text-gray-500 hover:text-gray-700 focus:text-gray-700 fixed focus:outline-none z-30 top-0 pt-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z"></path>
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </div>
+                            <ul class="flex text-3xl md:text-base items-center py-8 md:flex flex-col md:flex-row justify-center fixed md:relative top-0 bottom-0 left-0 right-0 bg-white z-20">
+                                <li class="text-gray-600 hover:text-gray-800 cursor-pointer md:ml-10 pt-10 md:pt-0">
+                                    <a href="javascript: void(0)">Company</a>
+                                </li>
+                                <li class="text-gray-600 hover:text-gray-800 cursor-pointer md:ml-10 pt-10 md:pt-0">
+                                    <a href="reset">Reset</a>
+                                </li>
+                                <li class="text-gray-600 hover:text-gray-800 cursor-pointer md:ml-10 pt-10 md:pt-0">
+                                    <a href="login">Enter</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="w-full px-6">
+                <div class="mt-8 relative rounded-lg bg-gradient-to-r from-indigo-500 to-indigo-700 container mx-auto flex flex-col items-center pt-12 sm:pt-24 pb-24 sm:pb-32 md:pb-48 lg:pb-56 xl:pb-64">
+                    <svg class="mr-2 lg:mr-12 mt-2 lg:mt-12 absolute right-0 top-0" width="104px" height="95px" viewBox="0 0 104 95" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <g id="Work-in-Progress" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.122837612">
+                            <g transform="translate(-1139.000000, -175.000000)" fill="#FFFFFF">
+                                <g id="Group-5" transform="translate(1139.000000, 175.000000)">
+                                    <path d="M1.99948119,4 C0.897535668,4 0,3.10246433 0,1.99948119 C0,0.896498054 0.897535668,0 1.99948119,0 C3.10350195,0 4,0.896498054 4,1.99948119 C4,3.10246433 3.10350195,4 1.99948119,4" id="Fill-46"></path>
+                                    <path d="M22,4 C20.8973029,4 20,3.10246433 20,1.99948119 C20,0.896498054 20.8973029,0 22,0 C23.1037344,0 24,0.896498054 24,1.99948119 C24,3.10246433 23.1037344,4 22,4" id="Fill-47"></path>
+                                    <path d="M42,4 C40.8962656,4 40,3.10246433 40,1.99948119 C40,0.896498054 40.8962656,0 42,0 C43.1016598,0 44,0.896498054 44,1.99948119 C44,3.10246433 43.1016598,4 42,4" id="Fill-48"></path>
+                                    <path d="M62.0005188,4 C60.8964981,4 60,3.10246433 60,1.99948119 C60,0.896498054 60.8964981,0 62.0005188,0 C63.1024643,0 64,0.896498054 64,1.99948119 C64,3.10246433 63.1024643,4 62.0005188,4" id="Fill-49"></path>
+                                    <path d="M81.9984436,4 C80.8964981,4 80,3.10246433 80,1.99948119 C80,0.896498054 80.8964981,0 81.9984436,0 C83.1024643,0 84,0.896498054 84,1.99948119 C84,3.10246433 83.1024643,4 81.9984436,4" id="Fill-50"></path>
+                                    <path d="M102,4 C100.89834,4 100,3.10246433 100,1.99948119 C100,0.896498054 100.89834,0 102,0 C103.103734,0 104,0.896498054 104,1.99948119 C104,3.10246433 103.103734,4 102,4" id="Fill-51"></path>
+                                    <path d="M1.99948119,22 C0.897535668,22 0,21.1024643 0,19.9994812 C0,18.8964981 0.897535668,18 1.99948119,18 C3.10350195,18 4,18.8964981 4,19.9994812 C4,21.1024643 3.10350195,22 1.99948119,22" id="Fill-52"></path>
+                                    <path d="M22,22 C20.8973029,22 20,21.1024643 20,19.9994812 C20,18.8964981 20.8973029,18 22,18 C23.1037344,18 24,18.8964981 24,19.9994812 C24,21.1024643 23.1037344,22 22,22" id="Fill-53"></path>
+                                    <path d="M42,22 C40.8962656,22 40,21.1024643 40,19.9994812 C40,18.8964981 40.8962656,18 42,18 C43.1016598,18 44,18.8964981 44,19.9994812 C44,21.1024643 43.1016598,22 42,22" id="Fill-54"></path>
+                                    <path d="M62.0005188,22 C60.8964981,22 60,21.1024643 60,19.9994812 C60,18.8964981 60.8964981,18 62.0005188,18 C63.1024643,18 64,18.8964981 64,19.9994812 C64,21.1024643 63.1024643,22 62.0005188,22" id="Fill-55"></path>
+                                    <path d="M81.9984436,22 C80.8964981,22 80,21.1024643 80,19.9994812 C80,18.8964981 80.8964981,18 81.9984436,18 C83.1024643,18 84,18.8964981 84,19.9994812 C84,21.1024643 83.1024643,22 81.9984436,22" id="Fill-56"></path>
+                                    <path d="M102,22 C100.89834,22 100,21.1024643 100,19.9994812 C100,18.8964981 100.89834,18 102,18 C103.103734,18 104,18.8964981 104,19.9994812 C104,21.1024643 103.103734,22 102,22" id="Fill-57"></path>
+                                    <path d="M1.99948119,40 C0.897535668,40 0,39.1026971 0,38 C0,36.8973029 0.897535668,36 1.99948119,36 C3.10350195,36 4,36.8973029 4,38 C4,39.1026971 3.10350195,40 1.99948119,40" id="Fill-58"></path>
+                                    <path d="M22,40 C20.8973029,40 20,39.1026971 20,38 C20,36.8973029 20.8973029,36 22,36 C23.1037344,36 24,36.8973029 24,38 C24,39.1026971 23.1037344,40 22,40" id="Fill-59"></path>
+                                    <path d="M42,40 C40.8962656,40 40,39.1026971 40,38 C40,36.8973029 40.8962656,36 42,36 C43.1016598,36 44,36.8973029 44,38 C44,39.1026971 43.1016598,40 42,40" id="Fill-60"></path>
+                                    <path d="M62.0005188,40 C60.8964981,40 60,39.1026971 60,38 C60,36.8973029 60.8964981,36 62.0005188,36 C63.1024643,36 64,36.8973029 64,38 C64,39.1026971 63.1024643,40 62.0005188,40" id="Fill-61"></path>
+                                    <path d="M81.9984436,40 C80.8964981,40 80,39.1026971 80,38 C80,36.8973029 80.8964981,36 81.9984436,36 C83.1024643,36 84,36.8973029 84,38 C84,39.1026971 83.1024643,40 81.9984436,40" id="Fill-62"></path>
+                                    <path d="M102,40 C100.89834,40 100,39.1026971 100,38 C100,36.8973029 100.89834,36 102,36 C103.103734,36 104,36.8973029 104,38 C104,39.1026971 103.103734,40 102,40" id="Fill-63"></path>
+                                    <path d="M1.99948119,59 C0.897535668,59 0,58.1026971 0,57 C0,55.8973029 0.897535668,55 1.99948119,55 C3.10350195,55 4,55.8973029 4,57 C4,58.1026971 3.10350195,59 1.99948119,59" id="Fill-64"></path>
+                                    <path d="M22,59 C20.8973029,59 20,58.1026971 20,57 C20,55.8973029 20.8973029,55 22,55 C23.1037344,55 24,55.8973029 24,57 C24,58.1026971 23.1037344,59 22,59" id="Fill-65"></path>
+                                    <path d="M42,59 C40.8962656,59 40,58.1026971 40,57 C40,55.8973029 40.8962656,55 42,55 C43.1016598,55 44,55.8973029 44,57 C44,58.1026971 43.1016598,59 42,59" id="Fill-66"></path>
+                                    <path d="M62.0005188,59 C60.8964981,59 60,58.1026971 60,57 C60,55.8973029 60.8964981,55 62.0005188,55 C63.1024643,55 64,55.8973029 64,57 C64,58.1026971 63.1024643,59 62.0005188,59" id="Fill-67"></path>
+                                    <path d="M81.9984436,59 C80.8964981,59 80,58.1026971 80,57 C80,55.8973029 80.8964981,55 81.9984436,55 C83.1024643,55 84,55.8973029 84,57 C84,58.1026971 83.1024643,59 81.9984436,59" id="Fill-68"></path>
+                                    <path d="M102,59 C100.89834,59 100,58.1026971 100,57 C100,55.8973029 100.89834,55 102,55 C103.103734,55 104,55.8973029 104,57 C104,58.1026971 103.103734,59 102,59" id="Fill-69"></path>
+                                    <path d="M1.99948119,77 C0.897535668,77 0,76.1026971 0,75 C0,73.8973029 0.897535668,73 1.99948119,73 C3.10350195,73 4,73.8973029 4,75 C4,76.1026971 3.10350195,77 1.99948119,77" id="Fill-70"></path>
+                                    <path d="M22,77 C20.8973029,77 20,76.1026971 20,75 C20,73.8973029 20.8973029,73 22,73 C23.1037344,73 24,73.8973029 24,75 C24,76.1026971 23.1037344,77 22,77" id="Fill-71"></path>
+                                    <path d="M42,77 C40.8962656,77 40,76.1026971 40,75 C40,73.8973029 40.8962656,73 42,73 C43.1016598,73 44,73.8973029 44,75 C44,76.1026971 43.1016598,77 42,77" id="Fill-72"></path>
+                                    <path d="M62.0005188,77 C60.8964981,77 60,76.1026971 60,75 C60,73.8973029 60.8964981,73 62.0005188,73 C63.1024643,73 64,73.8973029 64,75 C64,76.1026971 63.1024643,77 62.0005188,77" id="Fill-73"></path>
+                                    <path d="M81.9984436,77 C80.8964981,77 80,76.1026971 80,75 C80,73.8973029 80.8964981,73 81.9984436,73 C83.1024643,73 84,73.8973029 84,75 C84,76.1026971 83.1024643,77 81.9984436,77" id="Fill-74"></path>
+                                    <path d="M102,77 C100.89834,77 100,76.1026971 100,75 C100,73.8973029 100.89834,73 102,73 C103.103734,73 104,73.8973029 104,75 C104,76.1026971 103.103734,77 102,77" id="Fill-75"></path>
+                                    <path d="M1.99948119,95 C0.897535668,95 0,94.1024643 0,92.9994812 C0,91.8964981 0.897535668,91 1.99948119,91 C3.10350195,91 4,91.8964981 4,92.9994812 C4,94.1024643 3.10350195,95 1.99948119,95" id="Fill-76"></path>
+                                    <path d="M22,95 C20.8973029,95 20,94.1024643 20,92.9994812 C20,91.8964981 20.8973029,91 22,91 C23.1037344,91 24,91.8964981 24,92.9994812 C24,94.1024643 23.1037344,95 22,95" id="Fill-77"></path>
+                                    <path d="M42,95 C40.8962656,95 40,94.1024643 40,92.9994812 C40,91.8964981 40.8962656,91 42,91 C43.1016598,91 44,91.8964981 44,92.9994812 C44,94.1024643 43.1016598,95 42,95" id="Fill-78"></path>
+                                    <path d="M62.0005188,95 C60.8964981,95 60,94.1024643 60,92.9994812 C60,91.8964981 60.8964981,91 62.0005188,91 C63.1024643,91 64,91.8964981 64,92.9994812 C64,94.1024643 63.1024643,95 62.0005188,95" id="Fill-79"></path>
+                                    <path d="M81.9984436,95 C80.8964981,95 80,94.1024643 80,92.9994812 C80,91.8964981 80.8964981,91 81.9984436,91 C83.1024643,91 84,91.8964981 84,92.9994812 C84,94.1024643 83.1024643,95 81.9984436,95" id="Fill-80"></path>
+                                    <path d="M102,95 C100.89834,95 100,94.1024643 100,92.9994812 C100,91.8964981 100.89834,91 102,91 C103.103734,91 104,91.8964981 104,92.9994812 C104,94.1024643 103.103734,95 102,95" id="Fill-81"></path>
+                                    <polyline id="Fill-82" points="75 87 13 26 75 26 75 87"></polyline>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                    <svg class="ml-2 lg:ml-12 mb-2 lg:mb-12 absolute bottom-0 left-0" width="104px" height="95px" viewBox="0 0 104 95" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <g id="Work-in-Progress" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.122837612">
+                            <g transform="translate(-206.000000, -596.000000)" fill="#FFFFFF">
+                                <g id="Group-5" transform="translate(258.000000, 643.500000) scale(-1, -1) translate(-258.000000, -643.500000) translate(206.000000, 596.000000)">
+                                    <path d="M1.99948119,4 C0.897535668,4 0,3.10246433 0,1.99948119 C0,0.896498054 0.897535668,0 1.99948119,0 C3.10350195,0 4,0.896498054 4,1.99948119 C4,3.10246433 3.10350195,4 1.99948119,4" id="Fill-46"></path>
+                                    <path d="M22,4 C20.8973029,4 20,3.10246433 20,1.99948119 C20,0.896498054 20.8973029,0 22,0 C23.1037344,0 24,0.896498054 24,1.99948119 C24,3.10246433 23.1037344,4 22,4" id="Fill-47"></path>
+                                    <path d="M42,4 C40.8962656,4 40,3.10246433 40,1.99948119 C40,0.896498054 40.8962656,0 42,0 C43.1016598,0 44,0.896498054 44,1.99948119 C44,3.10246433 43.1016598,4 42,4" id="Fill-48"></path>
+                                    <path d="M62.0005188,4 C60.8964981,4 60,3.10246433 60,1.99948119 C60,0.896498054 60.8964981,0 62.0005188,0 C63.1024643,0 64,0.896498054 64,1.99948119 C64,3.10246433 63.1024643,4 62.0005188,4" id="Fill-49"></path>
+                                    <path d="M81.9984436,4 C80.8964981,4 80,3.10246433 80,1.99948119 C80,0.896498054 80.8964981,0 81.9984436,0 C83.1024643,0 84,0.896498054 84,1.99948119 C84,3.10246433 83.1024643,4 81.9984436,4" id="Fill-50"></path>
+                                    <path d="M102,4 C100.89834,4 100,3.10246433 100,1.99948119 C100,0.896498054 100.89834,0 102,0 C103.103734,0 104,0.896498054 104,1.99948119 C104,3.10246433 103.103734,4 102,4" id="Fill-51"></path>
+                                    <path d="M1.99948119,22 C0.897535668,22 0,21.1024643 0,19.9994812 C0,18.8964981 0.897535668,18 1.99948119,18 C3.10350195,18 4,18.8964981 4,19.9994812 C4,21.1024643 3.10350195,22 1.99948119,22" id="Fill-52"></path>
+                                    <path d="M22,22 C20.8973029,22 20,21.1024643 20,19.9994812 C20,18.8964981 20.8973029,18 22,18 C23.1037344,18 24,18.8964981 24,19.9994812 C24,21.1024643 23.1037344,22 22,22" id="Fill-53"></path>
+                                    <path d="M42,22 C40.8962656,22 40,21.1024643 40,19.9994812 C40,18.8964981 40.8962656,18 42,18 C43.1016598,18 44,18.8964981 44,19.9994812 C44,21.1024643 43.1016598,22 42,22" id="Fill-54"></path>
+                                    <path d="M62.0005188,22 C60.8964981,22 60,21.1024643 60,19.9994812 C60,18.8964981 60.8964981,18 62.0005188,18 C63.1024643,18 64,18.8964981 64,19.9994812 C64,21.1024643 63.1024643,22 62.0005188,22" id="Fill-55"></path>
+                                    <path d="M81.9984436,22 C80.8964981,22 80,21.1024643 80,19.9994812 C80,18.8964981 80.8964981,18 81.9984436,18 C83.1024643,18 84,18.8964981 84,19.9994812 C84,21.1024643 83.1024643,22 81.9984436,22" id="Fill-56"></path>
+                                    <path d="M102,22 C100.89834,22 100,21.1024643 100,19.9994812 C100,18.8964981 100.89834,18 102,18 C103.103734,18 104,18.8964981 104,19.9994812 C104,21.1024643 103.103734,22 102,22" id="Fill-57"></path>
+                                    <path d="M1.99948119,40 C0.897535668,40 0,39.1026971 0,38 C0,36.8973029 0.897535668,36 1.99948119,36 C3.10350195,36 4,36.8973029 4,38 C4,39.1026971 3.10350195,40 1.99948119,40" id="Fill-58"></path>
+                                    <path d="M22,40 C20.8973029,40 20,39.1026971 20,38 C20,36.8973029 20.8973029,36 22,36 C23.1037344,36 24,36.8973029 24,38 C24,39.1026971 23.1037344,40 22,40" id="Fill-59"></path>
+                                    <path d="M42,40 C40.8962656,40 40,39.1026971 40,38 C40,36.8973029 40.8962656,36 42,36 C43.1016598,36 44,36.8973029 44,38 C44,39.1026971 43.1016598,40 42,40" id="Fill-60"></path>
+                                    <path d="M62.0005188,40 C60.8964981,40 60,39.1026971 60,38 C60,36.8973029 60.8964981,36 62.0005188,36 C63.1024643,36 64,36.8973029 64,38 C64,39.1026971 63.1024643,40 62.0005188,40" id="Fill-61"></path>
+                                    <path d="M81.9984436,40 C80.8964981,40 80,39.1026971 80,38 C80,36.8973029 80.8964981,36 81.9984436,36 C83.1024643,36 84,36.8973029 84,38 C84,39.1026971 83.1024643,40 81.9984436,40" id="Fill-62"></path>
+                                    <path d="M102,40 C100.89834,40 100,39.1026971 100,38 C100,36.8973029 100.89834,36 102,36 C103.103734,36 104,36.8973029 104,38 C104,39.1026971 103.103734,40 102,40" id="Fill-63"></path>
+                                    <path d="M1.99948119,59 C0.897535668,59 0,58.1026971 0,57 C0,55.8973029 0.897535668,55 1.99948119,55 C3.10350195,55 4,55.8973029 4,57 C4,58.1026971 3.10350195,59 1.99948119,59" id="Fill-64"></path>
+                                    <path d="M22,59 C20.8973029,59 20,58.1026971 20,57 C20,55.8973029 20.8973029,55 22,55 C23.1037344,55 24,55.8973029 24,57 C24,58.1026971 23.1037344,59 22,59" id="Fill-65"></path>
+                                    <path d="M42,59 C40.8962656,59 40,58.1026971 40,57 C40,55.8973029 40.8962656,55 42,55 C43.1016598,55 44,55.8973029 44,57 C44,58.1026971 43.1016598,59 42,59" id="Fill-66"></path>
+                                    <path d="M62.0005188,59 C60.8964981,59 60,58.1026971 60,57 C60,55.8973029 60.8964981,55 62.0005188,55 C63.1024643,55 64,55.8973029 64,57 C64,58.1026971 63.1024643,59 62.0005188,59" id="Fill-67"></path>
+                                    <path d="M81.9984436,59 C80.8964981,59 80,58.1026971 80,57 C80,55.8973029 80.8964981,55 81.9984436,55 C83.1024643,55 84,55.8973029 84,57 C84,58.1026971 83.1024643,59 81.9984436,59" id="Fill-68"></path>
+                                    <path d="M102,59 C100.89834,59 100,58.1026971 100,57 C100,55.8973029 100.89834,55 102,55 C103.103734,55 104,55.8973029 104,57 C104,58.1026971 103.103734,59 102,59" id="Fill-69"></path>
+                                    <path d="M1.99948119,77 C0.897535668,77 0,76.1026971 0,75 C0,73.8973029 0.897535668,73 1.99948119,73 C3.10350195,73 4,73.8973029 4,75 C4,76.1026971 3.10350195,77 1.99948119,77" id="Fill-70"></path>
+                                    <path d="M22,77 C20.8973029,77 20,76.1026971 20,75 C20,73.8973029 20.8973029,73 22,73 C23.1037344,73 24,73.8973029 24,75 C24,76.1026971 23.1037344,77 22,77" id="Fill-71"></path>
+                                    <path d="M42,77 C40.8962656,77 40,76.1026971 40,75 C40,73.8973029 40.8962656,73 42,73 C43.1016598,73 44,73.8973029 44,75 C44,76.1026971 43.1016598,77 42,77" id="Fill-72"></path>
+                                    <path d="M62.0005188,77 C60.8964981,77 60,76.1026971 60,75 C60,73.8973029 60.8964981,73 62.0005188,73 C63.1024643,73 64,73.8973029 64,75 C64,76.1026971 63.1024643,77 62.0005188,77" id="Fill-73"></path>
+                                    <path d="M81.9984436,77 C80.8964981,77 80,76.1026971 80,75 C80,73.8973029 80.8964981,73 81.9984436,73 C83.1024643,73 84,73.8973029 84,75 C84,76.1026971 83.1024643,77 81.9984436,77" id="Fill-74"></path>
+                                    <path d="M102,77 C100.89834,77 100,76.1026971 100,75 C100,73.8973029 100.89834,73 102,73 C103.103734,73 104,73.8973029 104,75 C104,76.1026971 103.103734,77 102,77" id="Fill-75"></path>
+                                    <path d="M1.99948119,95 C0.897535668,95 0,94.1024643 0,92.9994812 C0,91.8964981 0.897535668,91 1.99948119,91 C3.10350195,91 4,91.8964981 4,92.9994812 C4,94.1024643 3.10350195,95 1.99948119,95" id="Fill-76"></path>
+                                    <path d="M22,95 C20.8973029,95 20,94.1024643 20,92.9994812 C20,91.8964981 20.8973029,91 22,91 C23.1037344,91 24,91.8964981 24,92.9994812 C24,94.1024643 23.1037344,95 22,95" id="Fill-77"></path>
+                                    <path d="M42,95 C40.8962656,95 40,94.1024643 40,92.9994812 C40,91.8964981 40.8962656,91 42,91 C43.1016598,91 44,91.8964981 44,92.9994812 C44,94.1024643 43.1016598,95 42,95" id="Fill-78"></path>
+                                    <path d="M62.0005188,95 C60.8964981,95 60,94.1024643 60,92.9994812 C60,91.8964981 60.8964981,91 62.0005188,91 C63.1024643,91 64,91.8964981 64,92.9994812 C64,94.1024643 63.1024643,95 62.0005188,95" id="Fill-79"></path>
+                                    <path d="M81.9984436,95 C80.8964981,95 80,94.1024643 80,92.9994812 C80,91.8964981 80.8964981,91 81.9984436,91 C83.1024643,91 84,91.8964981 84,92.9994812 C84,94.1024643 83.1024643,95 81.9984436,95" id="Fill-80"></path>
+                                    <path d="M102,95 C100.89834,95 100,94.1024643 100,92.9994812 C100,91.8964981 100.89834,91 102,91 C103.103734,91 104,91.8964981 104,92.9994812 C104,94.1024643 103.103734,95 102,95" id="Fill-81"></path>
+                                    <polyline id="Fill-82" points="75 87 13 26 75 26 75 87"></polyline>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                    <div class="w-11/12 sm:w-2/3 mb-5 sm:mb-10">
+	
+                        <div class="flex flex-wrap items-center md:flex-row flex-col-reverse">
+                      <div class="md:w-2/3 w-full pb-6 md:pb-0 md:pr-6 flex-col md:block flex items-center justify-center md:pt-0 pt-4">
+                                <h1 class="slide-in-bottom-h1 text-xl md:text-2xl lg:text-4xl xl:text-5xl lg:w-10/12 text-white font-black leading-tight md:text-left text-center">The Freedom to Be Yourself Online</h1>
+                                <a href="signup"><button class="slide-in-bottom-subtitle mt-5 lg:mt-12 py-3 lg:py-4 px-4 lg:px-6 bg-white font-bold text-indigo-700 rounded-lg text-sm lg:text-lg xl:text-xl hover:opacity-90">Join the Community</button></a>
+                            </div>
+                            <div class="md:w-1/3 w-full">
+                                <div class="flex fade-in flex-col items-center justify-center">
+                                    <div class="flex items-center mt-8">
+                                        <div class="xl:w-20 lg:h-14 lg:w-14 w-10 h-10 xl:h-20 rounded-full mr-3">
+                                            <img class="w-full h-full" src="https://postogon.com/lit/public_html/assets/avatars/avatar(1).png" alt="" />
+                                        </div>
+                                        <div class="xl:w-20 lg:h-14 lg:w-14 w-10 h-10 xl:h-20 rounded-full">
+                                            <img class="w-full h-full" src="https://postogon.com/lit/public_html/assets/avatars/avatar(2).png" alt="" />
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center mt-4">
+                                        <div class="xl:w-20 lg:h-14 lg:w-14 w-10 h-10 xl:h-20 rounded-full mr-3">
+                                            <img class="w-full h-full" src="https://postogon.com/lit/public_html/assets/avatars/avatar(1).png" alt="" />
+                                        </div>
+                                        <div class="xl:w-20 lg:h-14 lg:w-14 w-10 h-10 xl:h-20 rounded-full mr-3">
+                                            <img class="w-full h-full" src="https://postogon.com/lit/public_html/assets/avatars/avatar(2).png" alt="" />
+                                        </div>
+                                        <div class="xl:w-20 lg:h-14 lg:w-14 w-10 h-10 xl:h-20 rounded-full">
+                                            <img class="w-full h-full" src="https://postogon.com/lit/public_html/assets/avatars/avatar(3).png" alt="" />
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center mt-4">
+                                        <div class="xl:w-20 lg:h-14 lg:w-14 w-10 h-10 xl:h-20 rounded-full mr-3">
+                                            <img class="w-full h-full" src="https://postogon.com/lit/public_html/assets/avatars/avatar(1).png" alt="" />
+                                        </div>
+                                        <div class="xl:w-20 lg:h-14 lg:w-14 w-10 h-10 xl:h-20 rounded-full">
+                                            <img class="w-full h-full" src="https://postogon.com/lit/public_html/assets/avatars/avatar(3).png" alt="" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+       
+                    </div>
+                </div>
+                <div class="container mx-auto flex block md:hidden justify-center md:-mt-56 -mt-20 sm:-mt-40">
+                    <div class="relative bounce-top-icons sm:w-2/3 w-11/12">
+                        <img src="https://postogon.com/lit/public_html/assets/mockup.png" alt="" class="absolute z-20" />
+                    </div>
+                </div>
+<div class="flex w-full container mx-auto md:block hidden mr-60 -ml-39 items-end text-right md:text-right text-sm fade-in">
         <div class="mx-auto mb-4 md:mb-0">
-            <div class="w-48 text-gray-500 transition inline-block relative space-x-8 mb-4 mt-4 md:mt-0 md:mb-0">
+            <div class="w-48 text-green-500 transition inline-block relative space-x-8 mb-4 mt-4 md:mt-0 md:mb-0">
 		  <a href="https://imperfectandcompany.com/careers/" target="_blank" class="hover:text-gray-800">Jobs</a>
 		  <a href="https://imperfectandcompany.com/terms-of-service/" target="_blank" class="hover:text-gray-800">Legal</a>
 		  <a href="https://imperfectandcompany.com/privacy-policy/" target="_blank" class="hover:text-gray-800">Privacy</a>
             </div>
+        <div class="py-3 text-white select-none text-right mx-auto border-b md:border-b-0">
+© 2021 Imperfect and Company
+        </div>			
             <div>
             </div>
           </div>
-      </div>		
-		
+      </div>
+            </div>
+        
+	
+	
 	</div>
 	
 
-</div>
+
+    		
+
+	
 
