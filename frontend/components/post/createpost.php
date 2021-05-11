@@ -1,4 +1,4 @@
-      <div class="bg-white rounded p-2 mb-2 shadow-sm md:px-4 md:py-4 lg:ml-44 lg:mr-44 xl:ml-96 xl:mr-96 transition border-6">
+      <div class="rounded p-2 mb-2 shadow-sm md:px-4 md:py-4 lg:ml-44 lg:mr-44 xl:ml-96 xl:mr-96 transition border-6">
         <form method="post">
             <div x-data="{ count: 0 }" x-init="count = $refs.countme.value.length">
                <div class="flex">
@@ -9,12 +9,26 @@
                      </div>
                      <!-- END AVATAR MEDIUM -->
                   </div>
-<textarea id="text" name="postbody" class="animate-pulse w-full text-lg h-6 transition p-2 bg-white resize-none focus:outline-none char-limiter" maxlength="180" placeholder="What's Poppin'." rows="3" spellcheck="false" x-on:keyup="count = $refs.countme.value.length" x-ref="countme" style="height:44px;overflow-y:hidden;"></textarea>
+<textarea id="text" name="postbody" class="animate-pulse w-full text-lg h-6 transition p-2 bg-white dark:bg-dark resize-none focus:outline-none char-limiter" maxlength="180" placeholder="What's Poppin'." rows="3" spellcheck="false" x-on:keyup="count = $refs.countme.value.length" x-ref="countme" style="height:44px;overflow-y:hidden;"></textarea>
+
+
                </div>
 			   
                <div class="flex text-gray-500 ">
                   <div class="ml-auto text-xs font-semibold text-gray-400 count"><span x-html="count">0</span> / <span x-html="$refs.countme.maxLength">180</span></div>	
-            </div>				  
+            </div>
+<template x-if="count > 0">
+<div><script>      $(document).find('textarea').each(function () {
+        var offset = this.offsetHeight - this.clientHeight;
+        $(this).on('keyup input focus', function () {
+          $(this).css('height', '40px').css('height', this.scrollHeight + offset);
+        });
+        $(this).on('blur', function () {
+          $(this).animate({"height":"40px",}, "fast");
+        });			
+      });</script></div>
+</template>
+			
 			  <div class="flex ">
 <fieldset x-init="init()" x-data="window.RadioFields()">
   <legend class="sr-only">
@@ -22,7 +36,7 @@
   </legend>
   <div class="flex" >
 
-<div class="relative flex p-1 border"  :class="{ 'bg-indigo-100 border-indigo-200 z-10' : value == '1', 'border-gray-200' : value != '1' }">
+<div class="relative flex p-1 border"  :class="{ 'bg-indigo-100 border-indigo-200' : value == '1', 'border-gray-200' : value != '1' }">
       <div class="flex items-baseline h-5 ">
         <input id="settings-option-0" x-ref="radio" value="1" x-model="value" name="privacy_setting" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 cursor-pointer border-gray-300" checked>
       </div>
@@ -36,7 +50,7 @@
       </label>
     </div>
 
-<div class="relative flex p-1 border" :class="{ 'bg-indigo-100 border-indigo-200 z-10 ' : value == '2', 'border-gray-200' : value != '2' }">
+<div class="relative flex p-1 border" :class="{ 'bg-indigo-100 border-indigo-200' : value == '2', 'border-gray-200' : value != '2' }">
       <div class="flex items-baseline h-5 ">
         <input id="settings-option-1" name="privacy_setting" value="2" x-model="value" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 cursor-pointer border-gray-300">
       </div>

@@ -1,8 +1,117 @@
-CREATE TABLE users (
-    id int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(32) DEFAULT NULL,
-    email TEXT DEFAULT utf8_general_ci	NULL,
-    password VARCHAR(60) DEFAULT NULL,
-    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    UpdatedAt DATETIME NOT NULL
-)
+comments	CREATE TABLE `comments` (
+ `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+ `comment` text,
+ `user_id` int(11) unsigned DEFAULT NULL,
+ `post_id` int(11) unsigned NOT NULL,
+ `posted_on` int(11) DEFAULT NULL,
+ PRIMARY KEY (`ID`),
+ KEY `post_id` (`post_id`) USING BTREE,
+ KEY `user_id` (`user_id`) USING BTREE,
+ CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+ CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4
+ 
+comment_likes	CREATE TABLE `comment_likes` (
+ `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+ `user_id` int(11) unsigned NOT NULL,
+ `comment_id` int(11) unsigned NOT NULL,
+ PRIMARY KEY (`id`),
+ KEY `user_id` (`user_id`),
+ KEY `comment_id` (`comment_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+contacts	CREATE TABLE `contacts` (
+ `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+ `user_id` int(11) unsigned DEFAULT NULL,
+ `contact_id` int(11) unsigned DEFAULT NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=243 DEFAULT CHARSET=utf8
+
+followers	CREATE TABLE `followers` (
+ `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+ `user_id` int(11) unsigned DEFAULT NULL,
+ `follower_id` int(11) unsigned DEFAULT NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=344 DEFAULT CHARSET=utf8
+
+invites	CREATE TABLE `invites` (
+ `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+ `user_id` int(11) unsigned DEFAULT NULL,
+ `inviter_id` int(11) unsigned DEFAULT NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=352 DEFAULT CHARSET=utf8
+
+login_tokens	CREATE TABLE `login_tokens` (
+ `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+ `token` char(64) DEFAULT NULL,
+ `user_id` int(11) unsigned DEFAULT NULL,
+ PRIMARY KEY (`id`),
+ UNIQUE KEY `token` (`token`),
+ KEY `user_id` (`user_id`),
+ CONSTRAINT `login_tokens_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=153 DEFAULT CHARSET=utf8
+
+password_tokens	CREATE TABLE `password_tokens` (
+ `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+ `token` char(64) DEFAULT NULL,
+ `user_id` int(11) unsigned DEFAULT NULL,
+ PRIMARY KEY (`ID`),
+ UNIQUE KEY `token` (`token`)
+) ENGINE=MyISAM AUTO_INCREMENT=67 DEFAULT CHARSET=utf8
+
+posts	CREATE TABLE `posts` (
+ `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+ `body` varchar(180) NOT NULL,
+ `user_id` int(11) unsigned NOT NULL,
+ `to_whom` tinyint(3) DEFAULT '0',
+ `likes` int(11) unsigned DEFAULT '0',
+ `posted_on` int(11) DEFAULT NULL,
+ PRIMARY KEY (`id`),
+ KEY `user_id` (`user_id`) USING BTREE,
+ CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=202 DEFAULT CHARSET=utf8
+
+post_likes	CREATE TABLE `post_likes` (
+ `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+ `user_id` int(11) unsigned NOT NULL,
+ `post_id` int(11) unsigned NOT NULL,
+ PRIMARY KEY (`id`),
+ KEY `user_id` (`user_id`) USING BTREE,
+ KEY `timeline_id` (`post_id`) USING BTREE,
+ CONSTRAINT `post_likes_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
+ CONSTRAINT `post_likes_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=236 DEFAULT CHARSET=utf8
+
+replies	CREATE TABLE `replies` (
+ `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+ `reply` text,
+ `user_id` int(11) unsigned DEFAULT NULL,
+ `comment_id` int(11) unsigned NOT NULL,
+ `likes` int(11) unsigned DEFAULT NULL,
+ `posted_on` int(11) DEFAULT NULL,
+ PRIMARY KEY (`ID`),
+ KEY `comment_id` (`comment_id`) USING BTREE,
+ KEY `user_id` (`user_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4
+
+reply_likes	CREATE TABLE `reply_likes` (
+ `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+ `user_id` int(11) unsigned NOT NULL,
+ `reply_id` int(11) unsigned NOT NULL,
+ PRIMARY KEY (`id`),
+ KEY `user_id` (`user_id`),
+ KEY `reply_id` (`reply_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+
+users	CREATE TABLE `users` (
+ `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+ `username` varchar(32) DEFAULT NULL,
+ `email` text,
+ `password` varchar(60) DEFAULT NULL,
+ `status` set('online','away','offline','dnd') NOT NULL DEFAULT 'offline',
+ `admin` tinyint(1) NOT NULL DEFAULT '0',
+ `verified` tinyint(1) NOT NULL DEFAULT '0',
+ `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
+ `updatedAt` int(11) DEFAULT NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8

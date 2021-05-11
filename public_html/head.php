@@ -53,6 +53,53 @@ px`)
     }
                               )
   </script>
+<style>
+    :root {
+    --light: rgba(249, 250, 251, 1);
+    --dark: rgba(75, 85, 99, 1);
+    --darker: rgba(55, 65, 81, 1);
+    }
+
+    .dark .dark\:text-light {
+    color: var(--light);
+    }
+	
+	
+    .dark .dark\:text-dark {
+    color: var(--dark);
+    }
+	
+	
+    .dark .dark\:text-darker {
+    color: var(--darker);
+    }	
+	
+
+    .dark .dark\:border-light {
+    border-color: var(--light);
+    }
+
+    .dark .dark\:border-dark {
+    border-color: var(--dark);
+    }
+
+    .dark .dark\:border-darker {
+    border-color: var(--darker);
+    }		
+
+    .dark .dark\:bg-dark {
+    background-color: var(--dark);
+    }
+
+    .dark .dark\:bg-darker {
+    background-color: var(--darker);
+    }
+
+    .dark .dark\:text-gray-300 {
+    color: #D1D5DB;
+    }
+</style>  
+  
   <script>
     var mobile = window.matchMedia( "(max-width: 640px)" );
     var prevScrollpos = window.pageYOffset;
