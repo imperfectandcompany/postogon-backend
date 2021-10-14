@@ -1,10 +1,10 @@
-<?php
-if(isset($_POST['changepassword'])){
+ <?php
+if(isset($_POST['settings'])){
 
 //checks if all fields are filled in
 try {
-	
-if(!isset($_POST['oldpassword']) || !$_POST['oldpassword']){ throw new Exception('Error: You did not provide your old password!'); }	
+
+if(isset($_POST['oldpassword']) && $_POST['oldpassword']){	
 if(!isset($_POST['newpassword']) || !$_POST['newpassword']){ throw new Exception('Error: You did not provide a new password!'); }	
 if(!isset($_POST['newpasswordrepeat']) || !$_POST['newpasswordrepeat']){ throw new Exception('Error: You did not confirm your new password!'); }	
 //set variables
@@ -31,9 +31,11 @@ DatabaseConnector::query('UPDATE users SET password=:newpassword WHERE id=:useri
 		throw new Exception('Incorrect old password');
 }
 
+}
+
 	}	catch (Exception $e) {
                 $GLOBALS['errors'][] = $e->getMessage();
             }	
-	
+
 }
 ?>
